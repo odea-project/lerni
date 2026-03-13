@@ -1,6 +1,11 @@
 version: 1
-last_updated: 2026-03-13T21:20:00Z
+last_updated: 2026-03-13T21:52:00Z
 tasks:
+  - id: TASK-2026-0012
+    path: .aitask/tasks/TASK-2026-0012
+    status: closed
+    kind: live
+    title: Implement browser deck loading and site build MVP
   - id: TASK-2026-0011
     path: .aitask/tasks/TASK-2026-0011
     status: closed

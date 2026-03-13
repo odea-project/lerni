@@ -1,0 +1,227 @@
+{
+  "deckId": "runtime-review",
+  "slides": [
+    {
+      "slideId": "slide-1",
+      "templateId": "title-overview",
+      "slideKind": "overview",
+      "slotSequence": [
+        "title",
+        "explanation",
+        "example"
+      ],
+      "slots": [
+        {
+          "slotName": "title",
+          "regionName": "title",
+          "blocks": [
+            {
+              "block_id": "slide-1-title-1",
+              "kind": "heading",
+              "text": "Runtime Review",
+              "items": [],
+              "code": null,
+              "language": null,
+              "reveal_step": null
+            }
+          ]
+        },
+        {
+          "slotName": "explanation",
+          "regionName": "explanation",
+          "blocks": [
+            {
+              "block_id": "slide-1-explanation-1",
+              "kind": "paragraph",
+              "text": "Core runtime state still lives in the exported contract, while the browser layer only consumes those bounded semantics.",
+              "items": [],
+              "code": null,
+              "language": null,
+              "reveal_step": null
+            }
+          ]
+        },
+        {
+          "slotName": "example",
+          "regionName": "example",
+          "blocks": [
+            {
+              "block_id": "slide-1-example-1",
+              "kind": "list",
+              "text": null,
+              "items": [
+                "reveal progression",
+                "feedback visibility"
+              ],
+              "code": null,
+              "language": null,
+              "reveal_step": null
+            }
+          ]
+        }
+      ],
+      "interactions": [],
+      "runtime": {
+        "maxRevealStep": 0,
+        "answerCount": 0,
+        "initialSnapshot": {
+          "slideId": "slide-1",
+          "templateId": "title-overview",
+          "currentRevealStep": 0,
+          "maxRevealStep": 0,
+          "canAdvanceReveal": false,
+          "selectedAnswerIndex": null,
+          "feedbackVisible": false,
+          "activeMode": "content",
+          "slotVisibility": {
+            "title": {
+              "slotName": "title",
+              "visibleBlockIds": [
+                "slide-1-title-1"
+              ],
+              "hiddenBlockIds": []
+            },
+            "explanation": {
+              "slotName": "explanation",
+              "visibleBlockIds": [
+                "slide-1-explanation-1"
+              ],
+              "hiddenBlockIds": []
+            },
+            "example": {
+              "slotName": "example",
+              "visibleBlockIds": [
+                "slide-1-example-1"
+              ],
+              "hiddenBlockIds": []
+            }
+          }
+        }
+      }
+    },
+    {
+      "slideId": "slide-2",
+      "templateId": "quiz-feedback",
+      "slideKind": "quiz",
+      "slotSequence": [
+        "title",
+        "question",
+        "answer_choices",
+        "feedback"
+      ],
+      "slots": [
+        {
+          "slotName": "title",
+          "regionName": "title",
+          "blocks": [
+            {
+              "block_id": "slide-2-title-1",
+              "kind": "heading",
+              "text": "Runtime Boundary",
+              "items": [],
+              "code": null,
+              "language": null,
+              "reveal_step": null
+            }
+          ]
+        },
+        {
+          "slotName": "question",
+          "regionName": "question",
+          "blocks": [
+            {
+              "block_id": "slide-2-question-1",
+              "kind": "paragraph",
+              "text": "Which layer owns Markdown parsing?",
+              "items": [],
+              "code": null,
+              "language": null,
+              "reveal_step": null
+            }
+          ]
+        },
+        {
+          "slotName": "answer_choices",
+          "regionName": "answer_choices",
+          "blocks": [
+            {
+              "block_id": "slide-2-answer_choices-1",
+              "kind": "list",
+              "text": null,
+              "items": [
+                "The browser renderer",
+                "The Python pipeline"
+              ],
+              "code": null,
+              "language": null,
+              "reveal_step": null
+            }
+          ]
+        },
+        {
+          "slotName": "feedback",
+          "regionName": "feedback",
+          "blocks": [
+            {
+              "block_id": "slide-2-feedback-1",
+              "kind": "paragraph",
+              "text": "Markdown parsing remains on the Python side; the browser only reads exported payloads.",
+              "items": [],
+              "code": null,
+              "language": null,
+              "reveal_step": 1
+            }
+          ]
+        }
+      ],
+      "interactions": [
+        "question_flow",
+        "guided_reveal"
+      ],
+      "runtime": {
+        "maxRevealStep": 1,
+        "answerCount": 2,
+        "initialSnapshot": {
+          "slideId": "slide-2",
+          "templateId": "quiz-feedback",
+          "currentRevealStep": 0,
+          "maxRevealStep": 1,
+          "canAdvanceReveal": true,
+          "selectedAnswerIndex": null,
+          "feedbackVisible": false,
+          "activeMode": "question",
+          "slotVisibility": {
+            "title": {
+              "slotName": "title",
+              "visibleBlockIds": [
+                "slide-2-title-1"
+              ],
+              "hiddenBlockIds": []
+            },
+            "question": {
+              "slotName": "question",
+              "visibleBlockIds": [
+                "slide-2-question-1"
+              ],
+              "hiddenBlockIds": []
+            },
+            "answer_choices": {
+              "slotName": "answer_choices",
+              "visibleBlockIds": [
+                "slide-2-answer_choices-1"
+              ],
+              "hiddenBlockIds": []
+            },
+            "feedback": {
+              "slotName": "feedback",
+              "visibleBlockIds": [],
+              "hiddenBlockIds": [
+                "slide-2-feedback-1"
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

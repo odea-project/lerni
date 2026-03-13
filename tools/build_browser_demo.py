@@ -8,15 +8,16 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from lerni.browser_export import write_browser_payload
+from lerni.browser_export import build_browser_site
 
 SOURCE_PATH = REPO_ROOT / "tests" / "fixtures" / "mvp_deck.md"
-OUTPUT_PATH = REPO_ROOT / "web" / "data" / "mvp_deck.json"
+SOURCE_DIR = REPO_ROOT / "content" / "decks"
+OUTPUT_DIR = REPO_ROOT / "web" / "data" / "decks"
 
 
 def main() -> None:
-    output_path = write_browser_payload(SOURCE_PATH, OUTPUT_PATH, deck_id="browser-demo")
-    print(f"Wrote browser demo payload to {output_path}")
+    manifest = build_browser_site(SOURCE_DIR, OUTPUT_DIR)
+    print(f"Built browser site payloads for {len(manifest['decks'])} decks into {OUTPUT_DIR}")
 
 
 if __name__ == "__main__":

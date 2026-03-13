@@ -1,0 +1,20 @@
+{
+  "siteTitle": "Lerni Browser MVP",
+  "defaultDeckId": "intro-course",
+  "decks": [
+    {
+      "deckId": "intro-course",
+      "title": "Lerni Browser Intro",
+      "sourcePath": "decks/intro-course.md",
+      "payloadPath": "./data/decks/intro-course.json",
+      "slideCount": 2
+    },
+    {
+      "deckId": "runtime-review",
+      "title": "Runtime Review",
+      "sourcePath": "decks/runtime-review.md",
+      "payloadPath": "./data/decks/runtime-review.json",
+      "slideCount": 2
+    }
+  ]
+}

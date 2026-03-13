@@ -94,6 +94,40 @@ button {
   gap: 22px;
 }
 
+.deck-switcher {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+  padding: 14px 18px;
+  border: 1px solid rgba(25, 33, 38, 0.08);
+  border-radius: 22px;
+  background: rgba(255, 250, 242, 0.74);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+}
+
+.picker-label {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.deck-picker {
+  min-width: 220px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--paper-strong);
+  color: var(--ink);
+  padding: 10px 12px;
+}
+
+.deck-meta {
+  margin: 0;
+  color: var(--muted);
+}
+
 .slide-stage,
 .control-panel {
   min-width: 0;
@@ -385,7 +419,8 @@ button {
   }
 
   .hero-bar,
-  .stage-topbar {
+  .stage-topbar,
+  .deck-switcher {
     grid-template-columns: 1fr;
     display: grid;
   }

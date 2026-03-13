@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import asdict
 import json
 from pathlib import Path
+import re
 
 from .interaction_runtime import create_slide_runtime
 from .parser import parse_document
@@ -26,6 +27,39 @@ def write_browser_payload(source_path: Path, output_path: Path, deck_id: str = "
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
     return output_path
+
+
+def build_browser_site(source_dir: Path, output_dir: Path) -> dict[str, object]:
+    source_paths = sorted(source_dir.glob("*.md"))
+    if not source_paths:
+        raise ValueError(f"No Markdown decks found in {source_dir}")
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+    decks: list[dict[str, object]] = []
+    for source_path in source_paths:
+        deck_id = _slugify(source_path.stem)
+        payload_path = output_dir / f"{deck_id}.json"
+        payload = build_browser_payload_from_source(source_path.read_text(encoding="utf-8"), deck_id=deck_id)
+        relative_source_path = _relative_source_path(source_path, source_dir)
+        payload_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+        decks.append(
+            {
+                "deckId": deck_id,
+                "title": _derive_deck_title(payload, source_path),
+                "sourcePath": relative_source_path,
+                "payloadPath": f"./data/decks/{deck_id}.json",
+                "slideCount": len(payload["slides"]),
+            }
+        )
+
+    manifest = {
+        "siteTitle": "Lerni Browser MVP",
+        "defaultDeckId": decks[0]["deckId"],
+        "decks": decks,
+    }
+    manifest_path = output_dir.parent / "deck-manifest.json"
+    manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+    return manifest
 
 
 def _serialize_resolved_slide(resolved_slide) -> dict[str, object]:
@@ -77,3 +111,27 @@ def _serialize_snapshot(snapshot) -> dict[str, object]:
             for slot_name, visibility in snapshot.slot_visibility.items()
         },
     }
+
+
+def _derive_deck_title(payload: dict[str, object], source_path: Path) -> str:
+    slides = payload.get("slides", [])
+    if slides:
+      first_slide = slides[0]
+      for slot in first_slide.get("slots", []):
+          if slot.get("slotName") == "title":
+              blocks = slot.get("blocks", [])
+              if blocks and blocks[0].get("text"):
+                  return str(blocks[0]["text"])
+    return source_path.stem.replace("-", " ").title()
+
+
+def _slugify(value: str) -> str:
+    normalized = re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
+    return normalized or "deck"
+
+
+def _relative_source_path(source_path: Path, source_dir: Path) -> str:
+    try:
+        return source_path.relative_to(source_dir.parent).as_posix()
+    except ValueError:
+        return source_path.name

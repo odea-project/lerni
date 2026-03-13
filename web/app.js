@@ -1,4 +1,5 @@
 const pageState = {
+  manifest: null,
   deck: null,
   slideIndex: 0,
   runtimes: [],
@@ -7,6 +8,8 @@ const pageState = {
 const elements = {
   deckId: document.querySelector("#deck-id"),
   slideCount: document.querySelector("#slide-count"),
+  deckPicker: document.querySelector("#deck-picker"),
+  deckMeta: document.querySelector("#deck-meta"),
   slideTemplate: document.querySelector("#slide-template"),
   slideKind: document.querySelector("#slide-kind"),
   slideContent: document.querySelector("#slide-content"),
@@ -22,16 +25,17 @@ const elements = {
 void bootstrap();
 
 async function bootstrap() {
-  const response = await fetch("./data/mvp_deck.json");
-  if (!response.ok) {
-    throw new Error(`Failed to load browser payload: ${response.status}`);
+  const manifestResponse = await fetch("./data/deck-manifest.json");
+  if (!manifestResponse.ok) {
+    throw new Error(`Failed to load deck manifest: ${manifestResponse.status}`);
   }
 
-  const deck = await response.json();
-  pageState.deck = deck;
-  pageState.runtimes = deck.slides.map((slide) => createRuntimeState(slide));
+  pageState.manifest = await manifestResponse.json();
   wireEvents();
-  render();
+  populateDeckPicker();
+  const requestedDeckId = new URL(window.location.href).searchParams.get("deck");
+  const targetDeckId = resolveRequestedDeckId(requestedDeckId);
+  await loadDeck(targetDeckId);
 }
 
 function wireEvents() {
@@ -73,6 +77,40 @@ function wireEvents() {
     pageState.runtimes[pageState.slideIndex] = createRuntimeState(getCurrentSlide());
     render();
   });
+
+  elements.deckPicker.addEventListener("change", async (event) => {
+    await loadDeck(event.target.value);
+  });
+}
+
+function populateDeckPicker() {
+  elements.deckPicker.innerHTML = "";
+  pageState.manifest.decks.forEach((deck) => {
+    const option = document.createElement("option");
+    option.value = deck.deckId;
+    option.textContent = `${deck.title} (${deck.slideCount})`;
+    elements.deckPicker.appendChild(option);
+  });
+}
+
+async function loadDeck(deckId) {
+  const manifestEntry = pageState.manifest.decks.find((entry) => entry.deckId === deckId);
+  if (!manifestEntry) {
+    throw new Error(`Unknown deck id: ${deckId}`);
+  }
+
+  const response = await fetch(manifestEntry.payloadPath);
+  if (!response.ok) {
+    throw new Error(`Failed to load deck payload '${deckId}': ${response.status}`);
+  }
+
+  pageState.deck = await response.json();
+  pageState.slideIndex = 0;
+  pageState.runtimes = pageState.deck.slides.map((slide) => createRuntimeState(slide));
+  elements.deckPicker.value = deckId;
+  elements.deckMeta.textContent = `${manifestEntry.title} · ${manifestEntry.slideCount} slides · source ${manifestEntry.sourcePath}`;
+  updateDeckUrl(deckId);
+  render();
 }
 
 function render() {
@@ -319,4 +357,17 @@ function getCurrentSlide() {
 
 function getCurrentRuntime() {
   return pageState.runtimes[pageState.slideIndex];
+}
+
+function resolveRequestedDeckId(requestedDeckId) {
+  if (requestedDeckId && pageState.manifest.decks.some((entry) => entry.deckId === requestedDeckId)) {
+    return requestedDeckId;
+  }
+  return pageState.manifest.defaultDeckId;
+}
+
+function updateDeckUrl(deckId) {
+  const url = new URL(window.location.href);
+  url.searchParams.set("deck", deckId);
+  window.history.replaceState({}, "", url);
 }

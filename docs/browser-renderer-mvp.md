@@ -6,8 +6,8 @@ The first browser renderer MVP makes the web target concrete without replacing t
 
 The MVP browser path consists of two pieces:
 
-- a Python export step that turns the representative authored deck into a browser payload
-- a static browser renderer that consumes that payload and executes reveal, answer-selection, feedback, reset, and slide navigation behavior
+- a Python export step that turns repository-authored Markdown decks into browser payloads plus a manifest
+- a static browser renderer that consumes the manifest and selected payload and executes reveal, answer-selection, feedback, reset, and slide navigation behavior
 
 ## Export Contract
 
@@ -21,6 +21,11 @@ The browser payload contains:
 
 The browser does not parse Markdown and does not reinterpret semantic structure from scratch.
 
+The static site build also emits a manifest containing:
+
+- `defaultDeckId`
+- ordered deck entries with `deckId`, `title`, `payloadPath`, `sourcePath`, and `slideCount`
+
 ## Browser Scope
 
 The static renderer currently supports:
@@ -32,6 +37,7 @@ The static renderer currently supports:
 - single answer selection
 - explicit feedback reveal
 - slide reset
+- manifest-driven deck selection by picker or `?deck=` URL parameter
 
 The browser layer remains intentionally bounded. It is not a framework, editor, backend, or general state platform.
 
@@ -44,6 +50,8 @@ c:/Users/PCUser/github/lerni/.venv/Scripts/python.exe tools/build_browser_demo.p
 ```
 
 Then serve the `web/` directory with a static HTTP server such as Python's built-in `http.server` and open the resulting page in a browser.
+
+The browser will load the default deck from the manifest unless a specific `deck` query parameter is provided.
 
 ## Relationship To Existing Contracts
 

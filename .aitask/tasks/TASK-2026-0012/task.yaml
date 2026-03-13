@@ -1,0 +1,102 @@
+id: TASK-2026-0012
+title: Implement browser deck loading and site build MVP
+status: closed
+summary: >-
+  Implement a bounded browser deck-loading path and static site build flow so the
+  browser renderer can load one of multiple authored Markdown decks exported from
+  the repository instead of relying on a single hard-coded demo payload.
+requester: human:repository.owner
+business_owner: human:repository.owner
+technical_owner: human:repo.maintainer
+proposer: agent:repo-bootstrapper
+executor: agent:browser-site-builder
+reviewer: human:repository.owner
+approver: human:repository.owner
+auditor: human:repository.owner
+created_at: "2026-03-13T21:31:00Z"
+updated_at: "2026-03-13T21:36:00Z"
+due_date: null
+priority: high
+risk_tier: medium
+change_type: code
+systems_affected:
+  - browser-site-build
+  - deck-loading
+  - browser-renderer
+  - content-packaging
+data_classification: internal
+external_effects: internal-only
+allowed_agent_actions:
+  - draft and refine task records within approved scope
+  - implement a minimal multi-deck export and browser-loading path after explicit human approval is recorded
+  - add focused tests and fixtures needed to validate manifest and deck export behavior
+  - update minimal documentation required to explain the implemented loading flow
+  - run repository validation and test commands and capture outputs as evidence
+prohibited_agent_actions:
+  - widen scope into a general CMS, backend service, or authoring UI without explicit approval
+  - replace parser, template-resolution, or runtime contract ownership under this task
+  - bypass medium-risk approval controls or self-approve code execution
+  - introduce networking or persistence beyond static asset delivery under this task
+required_approvals:
+  - role: approver
+    identity: human:repository.owner
+    state: approved
+    approved_at: "2026-03-13T21:34:00Z"
+    notes: Repository owner approved the bounded browser deck-loading and static site build implementation step.
+linked_adr: not-required
+linked_issues: []
+linked_prs: []
+predecessor_tasks:
+  - TASK-2026-0011
+successor_tasks: []
+rollback_required: true
+evidence_required: true
+audit_scope: standard
+exceptions: []
+final_disposition: implemented
+status_history:
+  - from_status: null
+    to_status: proposed
+    changed_at: "2026-03-13T21:31:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: The browser renderer now needs a bounded content-loading path beyond a single hard-coded demo payload.
+  - from_status: proposed
+    to_status: triaged
+    changed_at: "2026-03-13T21:32:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Deck loading and static site packaging were separated from the initial renderer MVP so the browser layer can expand without reopening core browser controls.
+  - from_status: triaged
+    to_status: specified
+    changed_at: "2026-03-13T21:33:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Deliverables, acceptance criteria, and scope boundaries for multi-deck browser loading were documented.
+  - from_status: specified
+    to_status: risk-assessed
+    changed_at: "2026-03-13T21:34:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: The task is medium risk because it introduces content-packaging and browser deck selection behavior while remaining bounded and static.
+  - from_status: risk-assessed
+    to_status: approved
+    changed_at: "2026-03-13T21:34:00Z"
+    changed_by: human:repository.owner
+    reason: Execution approved for a bounded static site build and browser deck-loading path.
+  - from_status: approved
+    to_status: in-progress
+    changed_at: "2026-03-13T21:36:00Z"
+    changed_by: agent:browser-site-builder
+    reason: Implementation work started for multi-deck export, manifest generation, and browser deck selection.
+  - from_status: in-progress
+    to_status: in-review
+    changed_at: "2026-03-13T21:50:00Z"
+    changed_by: agent:browser-site-builder
+    reason: Multi-deck export, manifest generation, browser deck selection, and supporting tests were completed and submitted for review.
+  - from_status: in-review
+    to_status: accepted
+    changed_at: "2026-03-13T21:51:00Z"
+    changed_by: human:repository.owner
+    reason: Review completed with no findings; the deck-loading path remains static, bounded, and aligned to the browser renderer contract.
+  - from_status: accepted
+    to_status: closed
+    changed_at: "2026-03-13T21:52:00Z"
+    changed_by: human:repository.owner
+    reason: Audit and closure completed with no outstanding findings.
