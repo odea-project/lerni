@@ -1,0 +1,101 @@
+id: TASK-2026-0013
+title: Implement local browser workflow MVP
+status: closed
+summary: >-
+  Implement a bounded local workflow for building and serving the browser site so
+  the static browser MVP can be started reproducibly from the repository without
+  manual multi-step setup.
+requester: human:repository.owner
+business_owner: human:repository.owner
+technical_owner: human:repo.maintainer
+proposer: agent:repo-bootstrapper
+executor: agent:browser-workflow-implementer
+reviewer: human:repository.owner
+approver: human:repository.owner
+auditor: human:repository.owner
+created_at: "2026-03-13T22:00:00Z"
+updated_at: "2026-03-13T22:05:00Z"
+due_date: null
+priority: normal
+risk_tier: low
+change_type: code
+systems_affected:
+  - local-workflow
+  - browser-site-build
+  - developer-experience
+data_classification: internal
+external_effects: internal-only
+allowed_agent_actions:
+  - draft and refine task records within approved scope
+  - implement a minimal local build-and-serve workflow for the browser site after explicit human approval is recorded
+  - add focused tests needed to validate workflow helper behavior
+  - update minimal documentation required to explain the local run path
+  - run repository validation and test commands and capture outputs as evidence
+prohibited_agent_actions:
+  - widen scope into production deployment, backend hosting, or CI orchestration without explicit approval
+  - replace the browser site build or renderer contracts under this task
+  - bypass low-risk approval controls or self-approve code execution
+  - introduce external dependencies when the workflow can remain within the current Python toolchain
+required_approvals:
+  - role: approver
+    identity: human:repository.owner
+    state: approved
+    approved_at: "2026-03-13T22:03:00Z"
+    notes: Repository owner approved the bounded local browser workflow implementation step.
+linked_adr: not-required
+linked_issues: []
+linked_prs: []
+predecessor_tasks:
+  - TASK-2026-0012
+successor_tasks: []
+rollback_required: true
+evidence_required: true
+audit_scope: standard
+exceptions: []
+final_disposition: implemented
+status_history:
+  - from_status: null
+    to_status: proposed
+    changed_at: "2026-03-13T22:00:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: The browser MVP now needs a reproducible local workflow instead of manual build and serve steps.
+  - from_status: proposed
+    to_status: triaged
+    changed_at: "2026-03-13T22:01:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Local browser workflow work was separated from renderer and content-loading implementation so developer ergonomics can evolve independently.
+  - from_status: triaged
+    to_status: specified
+    changed_at: "2026-03-13T22:02:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Deliverables, acceptance criteria, and scope boundaries for the local browser workflow were documented.
+  - from_status: specified
+    to_status: risk-assessed
+    changed_at: "2026-03-13T22:03:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: The task is low risk because it adds only local helper workflow code and documentation around the existing static browser pipeline.
+  - from_status: risk-assessed
+    to_status: approved
+    changed_at: "2026-03-13T22:03:00Z"
+    changed_by: human:repository.owner
+    reason: Execution approved for a bounded local build-and-serve workflow around the existing browser site.
+  - from_status: approved
+    to_status: in-progress
+    changed_at: "2026-03-13T22:05:00Z"
+    changed_by: agent:browser-workflow-implementer
+    reason: Implementation work started for a reproducible local browser site workflow.
+  - from_status: in-progress
+    to_status: in-review
+    changed_at: "2026-03-13T22:12:00Z"
+    changed_by: agent:browser-workflow-implementer
+    reason: Local workflow helper, focused tests, and documentation updates were completed and submitted for review.
+  - from_status: in-review
+    to_status: accepted
+    changed_at: "2026-03-13T22:13:00Z"
+    changed_by: human:repository.owner
+    reason: Review completed with no findings; the local workflow stays bounded and uses the existing static site build rather than replacing it.
+  - from_status: accepted
+    to_status: closed
+    changed_at: "2026-03-13T22:14:00Z"
+    changed_by: human:repository.owner
+    reason: Audit and closure completed with no outstanding findings.

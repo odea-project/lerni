@@ -1,6 +1,11 @@
 version: 1
-last_updated: 2026-03-13T21:52:00Z
+last_updated: 2026-03-13T22:14:00Z
 tasks:
+  - id: TASK-2026-0013
+    path: .aitask/tasks/TASK-2026-0013
+    status: closed
+    kind: live
+    title: Implement local browser workflow MVP
   - id: TASK-2026-0012
     path: .aitask/tasks/TASK-2026-0012
     status: closed

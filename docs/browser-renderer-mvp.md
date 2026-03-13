@@ -53,6 +53,20 @@ Then serve the `web/` directory with a static HTTP server such as Python's built
 
 The browser will load the default deck from the manifest unless a specific `deck` query parameter is provided.
 
+For the simplified local workflow, use:
+
+```text
+c:/Users/PCUser/github/lerni/.venv/Scripts/python.exe tools/run_browser_site.py
+```
+
+Optional bounded flags:
+
+- `--host 0.0.0.0`
+- `--port 9000`
+- `--skip-build`
+
+This helper rebuilds the static site by default and then serves `web/` at a printed local URL.
+
 ## Relationship To Existing Contracts
 
 - parser and semantic model own authored-source interpretation
