@@ -1,7 +1,5 @@
-# TODO: Replace placeholder teams with real GitHub teams or users.
-
-* @ORG/repo-maintainers
-/.aitask/ @ORG/ai-governance @ORG/repo-maintainers
-/.github/workflows/ @ORG/ai-governance @ORG/repo-maintainers
-/.github/CODEOWNERS @ORG/ai-governance @ORG/repo-maintainers
-/.github/PULL_REQUEST_TEMPLATE.md @ORG/ai-governance @ORG/repo-maintainers
+* @odea-project
+/.aitask/ @odea-project
+/.github/workflows/ @odea-project
+/.github/CODEOWNERS @odea-project
+/.github/PULL_REQUEST_TEMPLATE.md @odea-project
