@@ -62,6 +62,8 @@ If `deck` or `slide` is invalid, the browser falls back predictably and shows a 
 
 The page now also exposes a direct slide picker, which stays synchronized with the current deck and writes the selected slide back into the `slide` URL parameter.
 
+The browser also exposes a small fixed shortcut set for the existing actions: Left for previous slide, Right for next slide, Space for reveal advancement, `F` for feedback, and `R` for reset. These shortcuts are ignored while form controls or buttons are focused.
+
 For the simplified local workflow, use:
 
 ```text

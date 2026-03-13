@@ -1,3 +1,5 @@
+const hasDom = typeof window !== "undefined" && typeof document !== "undefined";
+
 const pageState = {
   manifest: null,
   deck: null,
@@ -6,7 +8,7 @@ const pageState = {
   alertMessage: "",
 };
 
-const elements = {
+const elements = hasDom ? {
   deckId: document.querySelector("#deck-id"),
   slideCount: document.querySelector("#slide-count"),
   deckPicker: document.querySelector("#deck-picker"),
@@ -23,9 +25,11 @@ const elements = {
   advanceReveal: document.querySelector("#advance-reveal"),
   showFeedback: document.querySelector("#show-feedback"),
   resetSlide: document.querySelector("#reset-slide"),
-};
+} : null;
 
-void bootstrap();
+if (hasDom) {
+  void bootstrap();
+}
 
 async function bootstrap() {
   const manifestResponse = await fetch("./data/deck-manifest.json");
@@ -43,47 +47,23 @@ async function bootstrap() {
 
 function wireEvents() {
   elements.previousSlide.addEventListener("click", () => {
-    pageState.alertMessage = "";
-    pageState.slideIndex = Math.max(0, pageState.slideIndex - 1);
-    render();
+    goToPreviousSlide();
   });
 
   elements.nextSlide.addEventListener("click", () => {
-    pageState.alertMessage = "";
-    pageState.slideIndex = Math.min(pageState.deck.slides.length - 1, pageState.slideIndex + 1);
-    render();
+    goToNextSlide();
   });
 
   elements.advanceReveal.addEventListener("click", () => {
-    const slide = getCurrentSlide();
-    const runtime = getCurrentRuntime();
-    if (runtime.currentRevealStep < slide.runtime.maxRevealStep) {
-      pageState.alertMessage = "";
-      runtime.currentRevealStep += 1;
-      render();
-    }
+    advanceCurrentReveal();
   });
 
   elements.showFeedback.addEventListener("click", () => {
-    const slide = getCurrentSlide();
-    const runtime = getCurrentRuntime();
-    if (!slide.interactions.includes("question_flow") || runtime.selectedAnswerIndex === null || runtime.feedbackVisible) {
-      return;
-    }
-
-    pageState.alertMessage = "";
-    runtime.feedbackVisible = true;
-    const feedbackStep = firstFeedbackStep(slide);
-    if (feedbackStep !== null) {
-      runtime.currentRevealStep = Math.max(runtime.currentRevealStep, feedbackStep);
-    }
-    render();
+    showCurrentFeedback();
   });
 
   elements.resetSlide.addEventListener("click", () => {
-    pageState.alertMessage = "";
-    pageState.runtimes[pageState.slideIndex] = createRuntimeState(getCurrentSlide());
-    render();
+    resetCurrentSlide();
   });
 
   elements.deckPicker.addEventListener("change", async (event) => {
@@ -96,6 +76,98 @@ function wireEvents() {
     pageState.slideIndex = normalizeSlideIndex(Number.parseInt(event.target.value, 10), pageState.deck.slides.length);
     render();
   });
+
+  document.addEventListener("keydown", (event) => {
+    const action = resolveKeyboardAction(event);
+    if (!action) {
+      return;
+    }
+
+    event.preventDefault();
+    handleKeyboardAction(action);
+  });
+}
+
+function goToPreviousSlide() {
+  if (pageState.slideIndex === 0) {
+    return false;
+  }
+
+  pageState.alertMessage = "";
+  pageState.slideIndex -= 1;
+  render();
+  return true;
+}
+
+function goToNextSlide() {
+  if (pageState.slideIndex >= pageState.deck.slides.length - 1) {
+    return false;
+  }
+
+  pageState.alertMessage = "";
+  pageState.slideIndex += 1;
+  render();
+  return true;
+}
+
+function advanceCurrentReveal() {
+  const slide = getCurrentSlide();
+  const runtime = getCurrentRuntime();
+  if (runtime.currentRevealStep >= slide.runtime.maxRevealStep) {
+    return false;
+  }
+
+  pageState.alertMessage = "";
+  runtime.currentRevealStep += 1;
+  render();
+  return true;
+}
+
+function showCurrentFeedback() {
+  const slide = getCurrentSlide();
+  const runtime = getCurrentRuntime();
+  if (!slide.interactions.includes("question_flow") || runtime.selectedAnswerIndex === null || runtime.feedbackVisible) {
+    return false;
+  }
+
+  pageState.alertMessage = "";
+  runtime.feedbackVisible = true;
+  const feedbackStep = firstFeedbackStep(slide);
+  if (feedbackStep !== null) {
+    runtime.currentRevealStep = Math.max(runtime.currentRevealStep, feedbackStep);
+  }
+  render();
+  return true;
+}
+
+function resetCurrentSlide() {
+  pageState.alertMessage = "";
+  pageState.runtimes[pageState.slideIndex] = createRuntimeState(getCurrentSlide());
+  render();
+  return true;
+}
+
+function handleKeyboardAction(action) {
+  if (!pageState.deck) {
+    return false;
+  }
+
+  if (action === "previous-slide") {
+    return goToPreviousSlide();
+  }
+  if (action === "next-slide") {
+    return goToNextSlide();
+  }
+  if (action === "advance-reveal") {
+    return advanceCurrentReveal();
+  }
+  if (action === "show-feedback") {
+    return showCurrentFeedback();
+  }
+  if (action === "reset-slide") {
+    return resetCurrentSlide();
+  }
+  return false;
 }
 
 function populateDeckPicker() {
@@ -461,3 +533,50 @@ function buildSlideLabel(slide, index) {
   const title = titleBlock && titleBlock.text ? titleBlock.text : `${slide.templateId}`;
   return `${index + 1}. ${title}`;
 }
+
+function isShortcutTargetBlocked(target) {
+  if (!target) {
+    return false;
+  }
+
+  const tagName = typeof target.tagName === "string" ? target.tagName.toUpperCase() : "";
+  if (target.isContentEditable) {
+    return true;
+  }
+
+  return ["INPUT", "TEXTAREA", "SELECT", "BUTTON"].includes(tagName);
+}
+
+function resolveKeyboardAction(event) {
+  if (!event || event.defaultPrevented || event.repeat || event.altKey || event.ctrlKey || event.metaKey) {
+    return null;
+  }
+
+  if (isShortcutTargetBlocked(event.target)) {
+    return null;
+  }
+
+  if (event.key === "ArrowLeft") {
+    return "previous-slide";
+  }
+  if (event.key === "ArrowRight") {
+    return "next-slide";
+  }
+  if (event.key === " " || event.key === "Spacebar") {
+    return "advance-reveal";
+  }
+
+  const normalizedKey = typeof event.key === "string" ? event.key.toLowerCase() : "";
+  if (normalizedKey === "f") {
+    return "show-feedback";
+  }
+  if (normalizedKey === "r") {
+    return "reset-slide";
+  }
+  return null;
+}
+
+export {
+  isShortcutTargetBlocked,
+  resolveKeyboardAction,
+};

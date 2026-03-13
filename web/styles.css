@@ -334,6 +334,13 @@ button {
   gap: 10px;
 }
 
+.shortcut-hint {
+  margin: 0.85rem 0 0;
+  color: #5f6f81;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
 .action-button.amber {
   background: var(--amber);
   color: #1d1204;

@@ -1,6 +1,11 @@
 version: 1
-last_updated: 2026-03-13T22:54:00Z
+last_updated: 2026-03-13T23:16:00Z
 tasks:
+  - id: TASK-2026-0016
+    path: .aitask/tasks/TASK-2026-0016
+    status: closed
+    kind: live
+    title: Implement browser keyboard navigation MVP
   - id: TASK-2026-0015
     path: .aitask/tasks/TASK-2026-0015
     status: closed
