@@ -1,5 +1,5 @@
 version: 1
-last_updated: 2026-03-13T19:46:00Z
+last_updated: 2026-03-13T20:22:00Z
 tasks:
   - id: TASK-2026-0008
     path: .aitask/tasks/TASK-2026-0008
@@ -8,7 +8,7 @@ tasks:
     title: Implement the semantic parser and document normalizer MVP
   - id: TASK-2026-0009
     path: .aitask/tasks/TASK-2026-0009
-    status: risk-assessed
+    status: closed
     kind: live
     title: Implement template contract validation and resolution MVP
   - id: TASK-2026-0010

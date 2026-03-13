@@ -2,28 +2,31 @@
 
 ## Review Scope
 
-- task metadata completeness
-- implementation scope definition and control sufficiency
-- medium-risk guardrails for executable template resolution work
+- template resolution implementation alignment with docs/template-runtime-contract.md
+- required-versus-optional slot enforcement and explicit failure behavior
+- separation from renderer and interaction-runtime concerns
 
 ## Checks Performed
 
-- initial review pending future execution
+- verified that the implementation exposes explicit contracts for `title-overview` and `quiz-feedback`
+- verified that successful resolution returns a structural `ResolvedTemplateSlide` without introducing renderer-specific abstractions
+- verified that tests cover explicit template resolution, default template selection by slide kind, missing required slots, unsupported extra regions, incompatible block kinds, and empty-region rejection
+- verified that the implementation stays separate from interaction execution behavior while preserving reveal groups and interaction references for later runtime work
 
 ## Findings
 
-- none yet
+- none
 
 ## Requested Changes
 
-- none yet
+- none
 
 ## Decision
 
-Pending future execution review.
+Accepted.
 
 ## Reviewer Sign-Off
 
-- reviewer: human:repo.maintainer
-- reviewed_at: pending
-- rationale: review reserved until executable template-resolution work is produced.
+- reviewer: human:repository.owner
+- reviewed_at: 2026-03-13T20:21:00Z
+- rationale: The resolver is narrow, structurally strict, and tested against both success and failure cases without leaking into rendering or runtime behavior.
