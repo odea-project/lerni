@@ -1,0 +1,75 @@
+id: TASK-2026-0003
+title: Define the template system and template contract
+status: risk-assessed
+summary: >-
+  Prepare the governed task for defining the project's template system, including
+  reusable slide-template concepts, template responsibilities, content-region contracts,
+  author-to-template boundaries, and the minimum template abstractions needed for the MVP.
+requester: human:repository.owner
+business_owner: human:repository.owner
+technical_owner: human:repo.maintainer
+proposer: agent:repo-bootstrapper
+executor: agent:template-system-drafter
+reviewer: human:repo.maintainer
+approver: human:repository.owner
+auditor: human:internal.auditor
+created_at: "2026-03-13T14:38:00Z"
+updated_at: "2026-03-13T14:38:00Z"
+due_date: null
+priority: high
+risk_tier: medium
+change_type: documentation
+systems_affected:
+  - repository-docs
+  - template-system
+  - future-rendering-design
+data_classification: internal
+external_effects: internal-only
+allowed_agent_actions:
+  - draft and refine task records within approved scope
+  - draft docs/template-system.md after explicit human approval is recorded
+  - compare template abstractions, content-region contracts, and template-boundary choices using repository documents
+  - run repository validation commands and capture outputs as evidence
+prohibited_agent_actions:
+  - implement rendering engine or runtime template code under this task
+  - merge template-system scope with authoring-model or interaction-model implementation details
+  - define plugin or packaging architecture as settled implementation without later review
+  - self-approve or bypass medium-risk approval controls
+required_approvals:
+  - role: approver
+    identity: human:repository.owner
+    state: pending
+    approved_at: null
+    notes: Execution approval required before drafting docs/template-system.md.
+linked_adr: not-required
+linked_issues: []
+linked_prs: []
+predecessor_tasks:
+  - TASK-2026-0001
+successor_tasks: []
+rollback_required: true
+evidence_required: true
+audit_scope: standard
+exceptions: []
+final_disposition: open
+status_history:
+  - from_status: null
+    to_status: proposed
+    changed_at: "2026-03-13T14:33:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Follow-up task opened from the accepted project vision.
+  - from_status: proposed
+    to_status: triaged
+    changed_at: "2026-03-13T14:35:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Template-system work separated from authoring syntax and interaction behavior design.
+  - from_status: triaged
+    to_status: specified
+    changed_at: "2026-03-13T14:37:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Deliverables, responsibilities, and review expectations documented.
+  - from_status: specified
+    to_status: risk-assessed
+    changed_at: "2026-03-13T14:38:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Strategic design task classified as medium risk because it will shape reusable layout architecture and MVP boundaries.

@@ -1,6 +1,21 @@
 version: 1
-last_updated: 2026-03-13T14:20:00Z
+last_updated: 2026-03-13T14:45:00Z
 tasks:
+  - id: TASK-2026-0002
+    path: .aitask/tasks/TASK-2026-0002
+    status: risk-assessed
+    kind: live
+    title: Define the Markdown-first authoring model
+  - id: TASK-2026-0003
+    path: .aitask/tasks/TASK-2026-0003
+    status: risk-assessed
+    kind: live
+    title: Define the template system and template contract
+  - id: TASK-2026-0004
+    path: .aitask/tasks/TASK-2026-0004
+    status: risk-assessed
+    kind: live
+    title: Define the MVP interaction model for learning slides
   - id: TASK-2026-0001
     path: .aitask/tasks/TASK-2026-0001
     status: closed

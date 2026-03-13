@@ -1,0 +1,75 @@
+id: TASK-2026-0002
+title: Define the Markdown-first authoring model
+status: risk-assessed
+summary: >-
+  Prepare the governed task for defining the project's Markdown-first authoring model,
+  including the syntax philosophy, semantic slide structure, extension boundaries,
+  author ergonomics, and the separation between authored content and later rendering behavior.
+requester: human:repository.owner
+business_owner: human:repository.owner
+technical_owner: human:repo.maintainer
+proposer: agent:repo-bootstrapper
+executor: agent:authoring-model-drafter
+reviewer: human:repo.maintainer
+approver: human:repository.owner
+auditor: human:internal.auditor
+created_at: "2026-03-13T14:35:00Z"
+updated_at: "2026-03-13T14:35:00Z"
+due_date: null
+priority: high
+risk_tier: medium
+change_type: documentation
+systems_affected:
+  - repository-docs
+  - authoring-model
+  - future-parser-design
+data_classification: internal
+external_effects: internal-only
+allowed_agent_actions:
+  - draft and refine task records within approved scope
+  - draft docs/authoring-model.md after explicit human approval is recorded
+  - compare authoring syntax options and semantic tradeoffs using repository documents
+  - run repository validation commands and capture outputs as evidence
+prohibited_agent_actions:
+  - implement parser or rendering code under this task
+  - define low-level syntax details as binding architecture without later technical review
+  - self-approve or bypass medium-risk approval controls
+  - expand scope into template-system or interaction-system execution beyond documented interfaces
+required_approvals:
+  - role: approver
+    identity: human:repository.owner
+    state: pending
+    approved_at: null
+    notes: Execution approval required before drafting docs/authoring-model.md.
+linked_adr: not-required
+linked_issues: []
+linked_prs: []
+predecessor_tasks:
+  - TASK-2026-0001
+successor_tasks: []
+rollback_required: true
+evidence_required: true
+audit_scope: standard
+exceptions: []
+final_disposition: open
+status_history:
+  - from_status: null
+    to_status: proposed
+    changed_at: "2026-03-13T14:30:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Follow-up task opened from the accepted project vision.
+  - from_status: proposed
+    to_status: triaged
+    changed_at: "2026-03-13T14:32:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Authoring-model scope separated from template and interaction follow-up work.
+  - from_status: triaged
+    to_status: specified
+    changed_at: "2026-03-13T14:34:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Deliverables, key questions, and review expectations documented.
+  - from_status: specified
+    to_status: risk-assessed
+    changed_at: "2026-03-13T14:35:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Strategic design task classified as medium risk because it will shape parser and authoring architecture.
