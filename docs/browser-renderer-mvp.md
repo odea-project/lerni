@@ -60,6 +60,8 @@ Supported URL parameters:
 
 If `deck` or `slide` is invalid, the browser falls back predictably and shows a visible message instead of breaking the page.
 
+The page now also exposes a direct slide picker, which stays synchronized with the current deck and writes the selected slide back into the `slide` URL parameter.
+
 For the simplified local workflow, use:
 
 ```text

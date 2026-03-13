@@ -1,6 +1,11 @@
 version: 1
-last_updated: 2026-03-13T22:34:00Z
+last_updated: 2026-03-13T22:54:00Z
 tasks:
+  - id: TASK-2026-0015
+    path: .aitask/tasks/TASK-2026-0015
+    status: closed
+    kind: live
+    title: Implement browser slide jump UI MVP
   - id: TASK-2026-0014
     path: .aitask/tasks/TASK-2026-0014
     status: closed

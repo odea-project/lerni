@@ -10,6 +10,7 @@ const elements = {
   deckId: document.querySelector("#deck-id"),
   slideCount: document.querySelector("#slide-count"),
   deckPicker: document.querySelector("#deck-picker"),
+  slidePicker: document.querySelector("#slide-picker"),
   deckMeta: document.querySelector("#deck-meta"),
   browserAlert: document.querySelector("#browser-alert"),
   slideTemplate: document.querySelector("#slide-template"),
@@ -89,6 +90,12 @@ function wireEvents() {
     pageState.alertMessage = "";
     await loadDeck(event.target.value, 0);
   });
+
+  elements.slidePicker.addEventListener("change", (event) => {
+    pageState.alertMessage = "";
+    pageState.slideIndex = normalizeSlideIndex(Number.parseInt(event.target.value, 10), pageState.deck.slides.length);
+    render();
+  });
 }
 
 function populateDeckPicker() {
@@ -116,9 +123,20 @@ async function loadDeck(deckId, requestedSlideIndex = 0) {
   pageState.slideIndex = normalizeSlideIndex(requestedSlideIndex, pageState.deck.slides.length);
   pageState.runtimes = pageState.deck.slides.map((slide) => createRuntimeState(slide));
   elements.deckPicker.value = deckId;
+  populateSlidePicker();
   elements.deckMeta.textContent = `${manifestEntry.title} · ${manifestEntry.slideCount} slides · source ${manifestEntry.sourcePath}`;
   updateBrowserUrl(deckId, pageState.slideIndex);
   render();
+}
+
+function populateSlidePicker() {
+  elements.slidePicker.innerHTML = "";
+  pageState.deck.slides.forEach((slide, index) => {
+    const option = document.createElement("option");
+    option.value = String(index);
+    option.textContent = buildSlideLabel(slide, index);
+    elements.slidePicker.appendChild(option);
+  });
 }
 
 function render() {
@@ -128,6 +146,7 @@ function render() {
 
   elements.deckId.textContent = pageState.deck.deckId;
   elements.slideCount.textContent = `${pageState.slideIndex + 1} / ${pageState.deck.slides.length}`;
+  elements.slidePicker.value = String(pageState.slideIndex);
   elements.slideTemplate.textContent = slide.templateId;
   elements.slideKind.textContent = slide.slideKind ?? "untyped";
 
@@ -434,4 +453,11 @@ function normalizeSlideIndex(slideIndex, slideCount) {
     return 0;
   }
   return Math.min(slideIndex, slideCount - 1);
+}
+
+function buildSlideLabel(slide, index) {
+  const titleSlot = slide.slots.find((slot) => slot.slotName === "title");
+  const titleBlock = titleSlot && titleSlot.blocks.length > 0 ? titleSlot.blocks[0] : null;
+  const title = titleBlock && titleBlock.text ? titleBlock.text : `${slide.templateId}`;
+  return `${index + 1}. ${title}`;
 }

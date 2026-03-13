@@ -1,0 +1,100 @@
+id: TASK-2026-0015
+title: Implement browser slide jump UI MVP
+status: closed
+summary: >-
+  Implement a bounded browser UI control for direct slide jumps so the existing
+  `slide` URL-state can be driven from the page itself without introducing a
+  broader routing or presentation-control system.
+requester: human:repository.owner
+business_owner: human:repository.owner
+technical_owner: human:repo.maintainer
+proposer: agent:repo-bootstrapper
+executor: agent:browser-navigation-implementer
+reviewer: human:repository.owner
+approver: human:repository.owner
+auditor: human:repository.owner
+created_at: "2026-03-13T22:43:00Z"
+updated_at: "2026-03-13T22:48:00Z"
+due_date: null
+priority: normal
+risk_tier: low
+change_type: code
+systems_affected:
+  - browser-renderer
+  - browser-navigation-ui
+  - browser-url-state
+data_classification: internal
+external_effects: internal-only
+allowed_agent_actions:
+  - draft and refine task records within approved scope
+  - implement a minimal slide-jump UI over the existing browser URL-state after explicit human approval is recorded
+  - update minimal documentation required to explain supported navigation behavior
+  - run repository validation and browser-serving checks and capture outputs as evidence
+prohibited_agent_actions:
+  - widen scope into a general presentation controller or router without explicit approval
+  - replace the existing URL-state model under this task
+  - bypass low-risk approval controls or self-approve code execution
+  - introduce backend or persistence concerns under this task
+required_approvals:
+  - role: approver
+    identity: human:repository.owner
+    state: approved
+    approved_at: "2026-03-13T22:46:00Z"
+    notes: Repository owner approved the bounded browser slide-jump UI implementation step.
+linked_adr: not-required
+linked_issues: []
+linked_prs: []
+predecessor_tasks:
+  - TASK-2026-0014
+successor_tasks: []
+rollback_required: true
+evidence_required: true
+audit_scope: standard
+exceptions: []
+final_disposition: implemented
+status_history:
+  - from_status: null
+    to_status: proposed
+    changed_at: "2026-03-13T22:43:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: The browser now has URL-level slide state and needs a bounded in-page control to drive it directly.
+  - from_status: proposed
+    to_status: triaged
+    changed_at: "2026-03-13T22:44:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Slide-jump UI work was separated from URL-state handling so browser navigation controls can evolve independently.
+  - from_status: triaged
+    to_status: specified
+    changed_at: "2026-03-13T22:45:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Deliverables, acceptance criteria, and scope boundaries for direct slide-jump UI were documented.
+  - from_status: specified
+    to_status: risk-assessed
+    changed_at: "2026-03-13T22:46:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: The task is low risk because it adds only a bounded browser navigation control on top of the existing static URL-state behavior.
+  - from_status: risk-assessed
+    to_status: approved
+    changed_at: "2026-03-13T22:46:00Z"
+    changed_by: human:repository.owner
+    reason: Execution approved for a bounded slide-jump UI on top of the current browser navigation model.
+  - from_status: approved
+    to_status: in-progress
+    changed_at: "2026-03-13T22:48:00Z"
+    changed_by: agent:browser-navigation-implementer
+    reason: Implementation work started for direct slide selection within the existing browser renderer.
+  - from_status: in-progress
+    to_status: in-review
+    changed_at: "2026-03-13T22:52:00Z"
+    changed_by: agent:browser-navigation-implementer
+    reason: Slide-jump UI, synchronization behavior, and documentation updates were completed and submitted for review.
+  - from_status: in-review
+    to_status: accepted
+    changed_at: "2026-03-13T22:53:00Z"
+    changed_by: human:repository.owner
+    reason: Review completed with no findings; the direct slide-jump UI stays small, synchronized, and aligned to the existing URL-state model.
+  - from_status: accepted
+    to_status: closed
+    changed_at: "2026-03-13T22:54:00Z"
+    changed_by: human:repository.owner
+    reason: Audit and closure completed with no outstanding findings.
