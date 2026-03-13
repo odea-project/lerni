@@ -1,9 +1,9 @@
 version: 1
-last_updated: 2026-03-13T16:50:00Z
+last_updated: 2026-03-13T17:31:00Z
 tasks:
   - id: TASK-2026-0005
     path: .aitask/tasks/TASK-2026-0005
-    status: approved
+    status: closed
     kind: live
     title: Define the semantic document model and parse boundary
   - id: TASK-2026-0006
