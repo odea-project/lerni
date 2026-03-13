@@ -1,0 +1,78 @@
+id: TASK-2026-0005
+title: Define the semantic document model and parse boundary
+status: risk-assessed
+summary: >-
+  Prepare the governed task for defining how Markdown-first source plus project
+  extensions becomes a semantic internal document model, including parse boundaries,
+  canonical slide structures, and the separation between source syntax and downstream
+  template or runtime interpretation.
+requester: human:repository.owner
+business_owner: human:repository.owner
+technical_owner: human:repo.maintainer
+proposer: agent:repo-bootstrapper
+executor: agent:document-model-drafter
+reviewer: human:repo.maintainer
+approver: human:repository.owner
+auditor: human:internal.auditor
+created_at: "2026-03-13T16:31:00Z"
+updated_at: "2026-03-13T16:36:00Z"
+due_date: null
+priority: high
+risk_tier: medium
+change_type: documentation
+systems_affected:
+  - repository-docs
+  - parser-boundary
+  - semantic-document-model
+  - future-rendering-pipeline
+data_classification: internal
+external_effects: internal-only
+allowed_agent_actions:
+  - draft and refine task records within approved scope
+  - draft docs/document-model.md after explicit human approval is recorded
+  - compare source-authoring, template, and interaction documents to define a coherent semantic model
+  - run repository validation commands and capture outputs as evidence
+prohibited_agent_actions:
+  - implement a parser, renderer, or AST library under this task
+  - lock in low-level file formats or code APIs beyond product-level technical design intent
+  - collapse template or interaction responsibilities into the document model without documenting the tradeoff
+  - self-approve or bypass medium-risk approval controls
+required_approvals:
+  - role: approver
+    identity: human:repository.owner
+    state: pending
+    approved_at: null
+    notes: Execution approval required before drafting docs/document-model.md.
+linked_adr: not-required
+linked_issues: []
+linked_prs: []
+predecessor_tasks:
+  - TASK-2026-0001
+  - TASK-2026-0002
+successor_tasks: []
+rollback_required: true
+evidence_required: true
+audit_scope: standard
+exceptions: []
+final_disposition: open
+status_history:
+  - from_status: null
+    to_status: proposed
+    changed_at: "2026-03-13T16:31:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Follow-up task opened to convert the authoring model into a bounded semantic source-to-document design.
+  - from_status: proposed
+    to_status: triaged
+    changed_at: "2026-03-13T16:33:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: The parser and document-model boundary was separated from template resolution and interaction runtime concerns.
+  - from_status: triaged
+    to_status: specified
+    changed_at: "2026-03-13T16:35:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Deliverables, acceptance criteria, and scope boundaries for the semantic document model were documented.
+  - from_status: specified
+    to_status: risk-assessed
+    changed_at: "2026-03-13T16:36:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Strategic design task classified as medium risk because it will shape the internal representation for later parser, template, and runtime work.

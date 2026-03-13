@@ -1,0 +1,79 @@
+id: TASK-2026-0007
+title: Define the MVP interaction runtime state and execution model
+status: risk-assessed
+summary: >-
+  Prepare the governed task for defining how the MVP interaction model is realized
+  as bounded runtime state, event handling, and declarative execution flow, without
+  expanding into a general scripting or application-runtime platform.
+requester: human:repository.owner
+business_owner: human:repository.owner
+technical_owner: human:repo.maintainer
+proposer: agent:repo-bootstrapper
+executor: agent:interaction-runtime-drafter
+reviewer: human:repo.maintainer
+approver: human:repository.owner
+auditor: human:internal.auditor
+created_at: "2026-03-13T16:43:00Z"
+updated_at: "2026-03-13T16:48:00Z"
+due_date: null
+priority: high
+risk_tier: medium
+change_type: documentation
+systems_affected:
+  - repository-docs
+  - interaction-runtime
+  - reveal-state
+  - feedback-state
+  - future-slide-execution
+data_classification: internal
+external_effects: internal-only
+allowed_agent_actions:
+  - draft and refine task records within approved scope
+  - draft docs/mvp-interaction-runtime.md after explicit human approval is recorded
+  - compare interaction-model, template, and document-model expectations to define a bounded runtime execution design
+  - run repository validation commands and capture outputs as evidence
+prohibited_agent_actions:
+  - implement runtime state machines, widgets, or scripting APIs under this task
+  - broaden the MVP into general application-state orchestration without explicit approval
+  - treat arbitrary code execution as the default extensibility model
+  - self-approve or bypass medium-risk approval controls
+required_approvals:
+  - role: approver
+    identity: human:repository.owner
+    state: pending
+    approved_at: null
+    notes: Execution approval required before drafting docs/mvp-interaction-runtime.md.
+linked_adr: not-required
+linked_issues: []
+linked_prs: []
+predecessor_tasks:
+  - TASK-2026-0004
+  - TASK-2026-0005
+  - TASK-2026-0006
+successor_tasks: []
+rollback_required: true
+evidence_required: true
+audit_scope: standard
+exceptions: []
+final_disposition: open
+status_history:
+  - from_status: null
+    to_status: proposed
+    changed_at: "2026-03-13T16:43:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Follow-up task opened to turn the MVP interaction model into a bounded runtime execution design.
+  - from_status: proposed
+    to_status: triaged
+    changed_at: "2026-03-13T16:45:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Interaction runtime design was separated from document normalization and template binding concerns.
+  - from_status: triaged
+    to_status: specified
+    changed_at: "2026-03-13T16:47:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Deliverables, acceptance criteria, and runtime-boundary expectations for MVP interaction execution were documented.
+  - from_status: specified
+    to_status: risk-assessed
+    changed_at: "2026-03-13T16:48:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Strategic design task classified as medium risk because it will shape runtime state handling and event interpretation for interaction-capable slides.
