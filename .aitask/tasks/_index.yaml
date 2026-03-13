@@ -1,6 +1,11 @@
 version: 1
-last_updated: 2026-03-13T23:16:00Z
+last_updated: 2026-03-13T23:39:00Z
 tasks:
+  - id: TASK-2026-0017
+    path: .aitask/tasks/TASK-2026-0017
+    status: closed
+    kind: live
+    title: Implement keyboard-friendly quiz answer selection MVP
   - id: TASK-2026-0016
     path: .aitask/tasks/TASK-2026-0016
     status: closed

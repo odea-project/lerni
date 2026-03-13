@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
-import { isShortcutTargetBlocked, resolveKeyboardAction } from "../web/app.js";
+import { isShortcutTargetBlocked, resolveChoiceNavigationIndex, resolveKeyboardAction } from "../web/app.js";
 
 test("resolveKeyboardAction maps the bounded shortcut set", () => {
   assert.equal(resolveKeyboardAction({ key: "ArrowLeft", target: null }), "previous-slide");
@@ -27,4 +27,20 @@ test("isShortcutTargetBlocked recognizes interactive targets", () => {
   assert.equal(isShortcutTargetBlocked({ tagName: "TEXTAREA" }), true);
   assert.equal(isShortcutTargetBlocked({ tagName: "button" }), true);
   assert.equal(isShortcutTargetBlocked({ isContentEditable: true }), true);
+});
+
+test("resolveChoiceNavigationIndex supports bounded arrow and edge-key movement", () => {
+  assert.equal(resolveChoiceNavigationIndex(0, "ArrowRight", 3), 1);
+  assert.equal(resolveChoiceNavigationIndex(1, "ArrowDown", 3), 2);
+  assert.equal(resolveChoiceNavigationIndex(0, "ArrowLeft", 3), 2);
+  assert.equal(resolveChoiceNavigationIndex(2, "ArrowUp", 3), 1);
+  assert.equal(resolveChoiceNavigationIndex(2, "ArrowRight", 3), 0);
+  assert.equal(resolveChoiceNavigationIndex(2, "Home", 3), 0);
+  assert.equal(resolveChoiceNavigationIndex(0, "End", 3), 2);
+});
+
+test("resolveChoiceNavigationIndex ignores unrelated keys or empty choice sets", () => {
+  assert.equal(resolveChoiceNavigationIndex(0, "Enter", 3), null);
+  assert.equal(resolveChoiceNavigationIndex(0, " ", 3), null);
+  assert.equal(resolveChoiceNavigationIndex(0, "ArrowRight", 0), null);
 });

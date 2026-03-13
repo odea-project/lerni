@@ -64,6 +64,8 @@ The page now also exposes a direct slide picker, which stays synchronized with t
 
 The browser also exposes a small fixed shortcut set for the existing actions: Left for previous slide, Right for next slide, Space for reveal advancement, `F` for feedback, and `R` for reset. These shortcuts are ignored while form controls or buttons are focused.
 
+On quiz slides, answer choices now support a bounded keyboard flow: Tab enters the choice list, arrow keys move focus between choices, and Enter or Space selects the focused answer. After selection, focus moves to the feedback action when it is available.
+
 For the simplified local workflow, use:
 
 ```text

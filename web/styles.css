@@ -369,6 +369,13 @@ button {
   gap: 12px;
 }
 
+.choice-hint {
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: 0.93rem;
+  line-height: 1.45;
+}
+
 .quiz-choice {
   width: 100%;
   text-align: left;
@@ -381,6 +388,11 @@ button {
 .quiz-choice.selected {
   background: linear-gradient(160deg, rgba(213, 138, 39, 0.2), rgba(255, 255, 255, 0.92));
   border-color: rgba(213, 138, 39, 0.4);
+}
+
+.quiz-choice:focus-visible {
+  outline: 3px solid rgba(66, 81, 92, 0.55);
+  outline-offset: 3px;
 }
 
 .panel-copy {

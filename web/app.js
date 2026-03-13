@@ -147,6 +147,22 @@ function resetCurrentSlide() {
   return true;
 }
 
+function selectAnswerChoice(answerIndex) {
+  const runtime = getCurrentRuntime();
+  if (runtime.selectedAnswerIndex !== null) {
+    return false;
+  }
+
+  pageState.alertMessage = "";
+  runtime.selectedAnswerIndex = answerIndex;
+  render();
+
+  if (hasDom && !elements.showFeedback.disabled) {
+    elements.showFeedback.focus();
+  }
+  return true;
+}
+
 function handleKeyboardAction(action) {
   if (!pageState.deck) {
     return false;
@@ -339,14 +355,23 @@ function renderAnswerChoices(slot, runtime) {
   const section = document.createElement("section");
   section.className = "slot-card";
   section.dataset.slot = slot.slotName;
+  section.setAttribute("role", "group");
 
   const heading = document.createElement("h2");
   heading.className = "slot-title";
   heading.textContent = "answer choices";
+  heading.id = "answer-choices-heading";
   section.appendChild(heading);
+
+  const hint = document.createElement("p");
+  hint.className = "choice-hint";
+  hint.textContent = "Use Tab to enter choices, arrow keys to move, Enter or Space to choose.";
+  section.appendChild(hint);
 
   const grid = document.createElement("div");
   grid.className = "quiz-choice-grid";
+  grid.setAttribute("role", "radiogroup");
+  grid.setAttribute("aria-labelledby", heading.id);
 
   const items = slot.blocks.flatMap((block) => block.items ?? []);
   items.forEach((item, index) => {
@@ -355,10 +380,21 @@ function renderAnswerChoices(slot, runtime) {
     button.className = `quiz-choice${runtime.selectedAnswerIndex === index ? " selected" : ""}`;
     button.textContent = item;
     button.disabled = runtime.selectedAnswerIndex !== null;
+    button.dataset.choiceIndex = String(index);
+    button.setAttribute("role", "radio");
+    button.setAttribute("aria-checked", String(runtime.selectedAnswerIndex === index));
+    button.tabIndex = runtime.selectedAnswerIndex === null && index === 0 ? 0 : -1;
     button.addEventListener("click", () => {
-      pageState.alertMessage = "";
-      runtime.selectedAnswerIndex = index;
-      render();
+      selectAnswerChoice(index);
+    });
+    button.addEventListener("keydown", (event) => {
+      const nextIndex = resolveChoiceNavigationIndex(index, event.key, items.length);
+      if (nextIndex === null) {
+        return;
+      }
+
+      event.preventDefault();
+      moveChoiceFocus(grid, index, nextIndex);
     });
     grid.appendChild(button);
   });
@@ -534,6 +570,39 @@ function buildSlideLabel(slide, index) {
   return `${index + 1}. ${title}`;
 }
 
+function moveChoiceFocus(grid, currentIndex, nextIndex) {
+  const currentButton = grid.querySelector(`[data-choice-index="${currentIndex}"]`);
+  const nextButton = grid.querySelector(`[data-choice-index="${nextIndex}"]`);
+  if (!currentButton || !nextButton) {
+    return false;
+  }
+
+  currentButton.tabIndex = -1;
+  nextButton.tabIndex = 0;
+  nextButton.focus();
+  return true;
+}
+
+function resolveChoiceNavigationIndex(currentIndex, key, choiceCount) {
+  if (choiceCount <= 0) {
+    return null;
+  }
+
+  if (key === "Home") {
+    return 0;
+  }
+  if (key === "End") {
+    return choiceCount - 1;
+  }
+  if (key === "ArrowLeft" || key === "ArrowUp") {
+    return currentIndex === 0 ? choiceCount - 1 : currentIndex - 1;
+  }
+  if (key === "ArrowRight" || key === "ArrowDown") {
+    return currentIndex === choiceCount - 1 ? 0 : currentIndex + 1;
+  }
+  return null;
+}
+
 function isShortcutTargetBlocked(target) {
   if (!target) {
     return false;
@@ -577,6 +646,7 @@ function resolveKeyboardAction(event) {
 }
 
 export {
+  resolveChoiceNavigationIndex,
   isShortcutTargetBlocked,
   resolveKeyboardAction,
 };

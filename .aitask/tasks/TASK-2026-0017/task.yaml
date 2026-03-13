@@ -1,0 +1,102 @@
+id: TASK-2026-0017
+title: Implement keyboard-friendly quiz answer selection MVP
+status: closed
+summary: >-
+  Add a bounded accessibility improvement for quiz slides so answer choices are
+  easier to navigate and complete by keyboard without widening into a larger
+  browser accessibility framework.
+requester: human:repository.owner
+business_owner: human:repository.owner
+technical_owner: human:repo.maintainer
+proposer: agent:repo-bootstrapper
+executor: agent:browser-navigation-implementer
+reviewer: human:repository.owner
+approver: human:repository.owner
+auditor: human:repository.owner
+created_at: "2026-03-13T23:24:00Z"
+updated_at: "2026-03-13T23:39:00Z"
+due_date: null
+priority: normal
+risk_tier: low
+change_type: code
+systems_affected:
+  - browser-renderer
+  - browser-navigation-ui
+  - browser-accessibility
+  - browser-validation
+data_classification: internal
+external_effects: internal-only
+allowed_agent_actions:
+  - draft and refine task records within approved scope
+  - implement minimal keyboard improvements for quiz answer selection after explicit human approval is recorded
+  - add lightweight validation that does not require introducing a browser framework
+  - update minimal documentation required to explain supported quiz keyboard behavior
+  - run repository validation and browser-serving checks and capture outputs as evidence
+prohibited_agent_actions:
+  - widen scope into a general accessibility framework or presentation controller without explicit approval
+  - change the bounded quiz-answering product rule under this task
+  - bypass low-risk approval controls or self-approve code execution
+  - introduce backend, persistence, or new build dependencies under this task
+required_approvals:
+  - role: approver
+    identity: human:repository.owner
+    state: approved
+    approved_at: "2026-03-13T23:24:00Z"
+    notes: Repository owner approved the bounded quiz answer keyboard accessibility slice by requesting this next step.
+linked_adr: not-required
+linked_issues: []
+linked_prs: []
+predecessor_tasks:
+  - TASK-2026-0016
+successor_tasks: []
+rollback_required: true
+evidence_required: true
+audit_scope: standard
+exceptions: []
+final_disposition: implemented
+status_history:
+  - from_status: null
+    to_status: proposed
+    changed_at: "2026-03-13T23:24:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: The browser now has global keyboard shortcuts, but quiz answer choices still need a bounded keyboard-friendly flow within the slide itself.
+  - from_status: proposed
+    to_status: triaged
+    changed_at: "2026-03-13T23:25:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Quiz answer accessibility was separated as its own follow-up so keyboard ergonomics can improve without broadening the browser scope too far in one task.
+  - from_status: triaged
+    to_status: specified
+    changed_at: "2026-03-13T23:26:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Deliverables, acceptance criteria, and scope boundaries for keyboard-friendly quiz answer selection were documented.
+  - from_status: specified
+    to_status: risk-assessed
+    changed_at: "2026-03-13T23:27:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: The task is low risk because it adds only a small keyboard and focus behavior layer to existing quiz choice buttons.
+  - from_status: risk-assessed
+    to_status: approved
+    changed_at: "2026-03-13T23:24:00Z"
+    changed_by: human:repository.owner
+    reason: Execution approved for a bounded accessibility improvement to quiz answer selection.
+  - from_status: approved
+    to_status: in-progress
+    changed_at: "2026-03-13T23:31:00Z"
+    changed_by: agent:browser-navigation-implementer
+    reason: Implementation work started for quiz answer keyboard flow, focus handling, and lightweight validation.
+  - from_status: in-progress
+    to_status: in-review
+    changed_at: "2026-03-13T23:37:00Z"
+    changed_by: agent:browser-navigation-implementer
+    reason: Quiz answer keyboard flow, helper tests, and documentation updates were completed and submitted for review.
+  - from_status: in-review
+    to_status: accepted
+    changed_at: "2026-03-13T23:38:00Z"
+    changed_by: human:repository.owner
+    reason: Review completed with no findings; the quiz keyboard improvements remain local, predictable, and aligned to the bounded browser interaction model.
+  - from_status: accepted
+    to_status: closed
+    changed_at: "2026-03-13T23:39:00Z"
+    changed_by: human:repository.owner
+    reason: Audit and closure completed with no outstanding findings.
