@@ -1,6 +1,6 @@
 id: TASK-2026-0005
 title: Define the semantic document model and parse boundary
-status: risk-assessed
+status: approved
 summary: >-
   Prepare the governed task for defining how Markdown-first source plus project
   extensions becomes a semantic internal document model, including parse boundaries,
@@ -15,7 +15,7 @@ reviewer: human:repo.maintainer
 approver: human:repository.owner
 auditor: human:internal.auditor
 created_at: "2026-03-13T16:31:00Z"
-updated_at: "2026-03-13T16:36:00Z"
+updated_at: "2026-03-13T17:00:00Z"
 due_date: null
 priority: high
 risk_tier: medium
@@ -40,9 +40,9 @@ prohibited_agent_actions:
 required_approvals:
   - role: approver
     identity: human:repository.owner
-    state: pending
-    approved_at: null
-    notes: Execution approval required before drafting docs/document-model.md.
+    state: approved
+    approved_at: "2026-03-13T17:00:00Z"
+    notes: Approved to execute the semantic document-model design task within the documented scope.
 linked_adr: not-required
 linked_issues: []
 linked_prs: []
@@ -76,3 +76,8 @@ status_history:
     changed_at: "2026-03-13T16:36:00Z"
     changed_by: agent:repo-bootstrapper
     reason: Strategic design task classified as medium risk because it will shape the internal representation for later parser, template, and runtime work.
+  - from_status: risk-assessed
+    to_status: approved
+    changed_at: "2026-03-13T17:00:00Z"
+    changed_by: human:repository.owner
+    reason: Execution approved because the product foundations are now stable enough to define the semantic normalization boundary.
