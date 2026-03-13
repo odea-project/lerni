@@ -2,28 +2,33 @@
 
 ## Review Scope
 
-- task metadata completeness
-- specification quality and scope separation
-- medium-risk control sufficiency
+- docs/authoring-model.md content and structure
+- alignment with task acceptance criteria
+- boundary clarity relative to templates and interactions
+- readability and author-ergonomics emphasis
 
 ## Checks Performed
 
-- initial review pending future execution
+- checked that the document clearly explains the role of Markdown and project-specific extensions
+- checked that the main semantic concepts authors must express are identified
+- checked that the boundary to templates and interactions is explicit
+- checked that readability and author ergonomics are treated as first-class concerns
+- checked that the document avoids binding parser grammar or runtime implementation details prematurely
 
 ## Findings
 
-- none yet
+- none
 
 ## Requested Changes
 
-- none yet
+- none
 
 ## Decision
 
-Pending future execution review.
+`accepted`
 
 ## Reviewer Sign-Off
 
-- reviewer: human:repo.maintainer
-- reviewed_at: pending
-- rationale: review reserved until docs/authoring-model.md is drafted.
+- reviewer: human:repository.owner
+- reviewed_at: 2026-03-13T15:22:00Z
+- rationale: The draft is specific enough to guide later technical work while preserving intentional non-commitment on final syntax and parser design.
