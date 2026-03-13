@@ -1,5 +1,5 @@
 version: 1
-last_updated: 2026-03-13T17:31:00Z
+last_updated: 2026-03-13T18:06:00Z
 tasks:
   - id: TASK-2026-0005
     path: .aitask/tasks/TASK-2026-0005
@@ -8,7 +8,7 @@ tasks:
     title: Define the semantic document model and parse boundary
   - id: TASK-2026-0006
     path: .aitask/tasks/TASK-2026-0006
-    status: risk-assessed
+    status: closed
     kind: live
     title: Define the template runtime contract and resolution model
   - id: TASK-2026-0007

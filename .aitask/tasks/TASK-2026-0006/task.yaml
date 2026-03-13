@@ -1,6 +1,6 @@
 id: TASK-2026-0006
 title: Define the template runtime contract and resolution model
-status: risk-assessed
+status: closed
 summary: >-
   Prepare the governed task for defining how templates are resolved against the
   semantic document model, including slot contracts, validation boundaries,
@@ -11,11 +11,11 @@ business_owner: human:repository.owner
 technical_owner: human:repo.maintainer
 proposer: agent:repo-bootstrapper
 executor: agent:template-runtime-drafter
-reviewer: human:repo.maintainer
+reviewer: human:repository.owner
 approver: human:repository.owner
-auditor: human:internal.auditor
+auditor: human:repository.owner
 created_at: "2026-03-13T16:37:00Z"
-updated_at: "2026-03-13T16:42:00Z"
+updated_at: "2026-03-13T18:06:00Z"
 due_date: null
 priority: high
 risk_tier: medium
@@ -40,9 +40,9 @@ prohibited_agent_actions:
 required_approvals:
   - role: approver
     identity: human:repository.owner
-    state: pending
-    approved_at: null
-    notes: Execution approval required before drafting docs/template-runtime-contract.md.
+    state: approved
+    approved_at: "2026-03-13T17:40:00Z"
+    notes: Approved to execute the template runtime contract design task within the documented scope.
 linked_adr: not-required
 linked_issues: []
 linked_prs: []
@@ -55,7 +55,7 @@ rollback_required: true
 evidence_required: true
 audit_scope: standard
 exceptions: []
-final_disposition: open
+final_disposition: implemented
 status_history:
   - from_status: null
     to_status: proposed
@@ -77,3 +77,28 @@ status_history:
     changed_at: "2026-03-13T16:42:00Z"
     changed_by: agent:repo-bootstrapper
     reason: Strategic design task classified as medium risk because it will shape how semantic content binds to templates and later rendering behavior.
+  - from_status: risk-assessed
+    to_status: approved
+    changed_at: "2026-03-13T17:40:00Z"
+    changed_by: human:repository.owner
+    reason: Execution approved because the semantic document-model baseline is now available and the template-resolution boundary can be defined concretely.
+  - from_status: approved
+    to_status: in-progress
+    changed_at: "2026-03-13T17:48:00Z"
+    changed_by: agent:template-runtime-drafter
+    reason: Drafting of docs/template-runtime-contract.md started within the approved technical-design scope.
+  - from_status: in-progress
+    to_status: in-review
+    changed_at: "2026-03-13T17:56:00Z"
+    changed_by: agent:template-runtime-drafter
+    reason: Draft completed and submitted for formal review against the template-runtime acceptance criteria.
+  - from_status: in-review
+    to_status: accepted
+    changed_at: "2026-03-13T17:58:00Z"
+    changed_by: human:repository.owner
+    reason: Review completed with no findings and the template runtime contract was accepted as the MVP baseline.
+  - from_status: accepted
+    to_status: closed
+    changed_at: "2026-03-13T18:06:00Z"
+    changed_by: human:repository.owner
+    reason: Audit and closure completed with no outstanding findings.
