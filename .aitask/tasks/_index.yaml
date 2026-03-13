@@ -1,9 +1,9 @@
 version: 1
-last_updated: 2026-03-13T19:05:00Z
+last_updated: 2026-03-13T19:46:00Z
 tasks:
   - id: TASK-2026-0008
     path: .aitask/tasks/TASK-2026-0008
-    status: risk-assessed
+    status: closed
     kind: live
     title: Implement the semantic parser and document normalizer MVP
   - id: TASK-2026-0009

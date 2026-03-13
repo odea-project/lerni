@@ -1,6 +1,6 @@
 id: TASK-2026-0008
 title: Implement the semantic parser and document normalizer MVP
-status: risk-assessed
+status: closed
 summary: >-
   Prepare the governed task for implementing the first parser and normalization
   slice that turns Markdown-first authored source into the semantic document model
@@ -10,11 +10,11 @@ business_owner: human:repository.owner
 technical_owner: human:repo.maintainer
 proposer: agent:repo-bootstrapper
 executor: agent:parser-implementer
-reviewer: human:repo.maintainer
+reviewer: human:repository.owner
 approver: human:repository.owner
-auditor: human:internal.auditor
+auditor: human:repository.owner
 created_at: "2026-03-13T18:50:00Z"
-updated_at: "2026-03-13T18:55:00Z"
+updated_at: "2026-03-13T19:46:00Z"
 due_date: null
 priority: high
 risk_tier: medium
@@ -40,9 +40,9 @@ prohibited_agent_actions:
 required_approvals:
   - role: approver
     identity: human:repository.owner
-    state: pending
-    approved_at: null
-    notes: Execution approval required before implementing parser or normalization code.
+    state: approved
+    approved_at: "2026-03-13T19:18:00Z"
+    notes: Approved to implement the first parser and normalization slice within the documented MVP scope.
 linked_adr: not-required
 linked_issues: []
 linked_prs: []
@@ -53,7 +53,7 @@ rollback_required: true
 evidence_required: true
 audit_scope: standard
 exceptions: []
-final_disposition: open
+final_disposition: implemented
 status_history:
   - from_status: null
     to_status: proposed
@@ -75,3 +75,28 @@ status_history:
     changed_at: "2026-03-13T18:55:00Z"
     changed_by: agent:repo-bootstrapper
     reason: Implementation task classified as medium risk because it introduces the first executable interpretation of authored source into the semantic document model.
+  - from_status: risk-assessed
+    to_status: approved
+    changed_at: "2026-03-13T19:18:00Z"
+    changed_by: human:repository.owner
+    reason: Execution approved because the semantic document-model baseline is stable enough to support a bounded parser MVP slice.
+  - from_status: approved
+    to_status: in-progress
+    changed_at: "2026-03-13T19:32:00Z"
+    changed_by: agent:parser-implementer
+    reason: Implementation of the first parser and normalization slice started within the approved scope.
+  - from_status: in-progress
+    to_status: in-review
+    changed_at: "2026-03-13T19:42:00Z"
+    changed_by: agent:parser-implementer
+    reason: Implementation completed, regression-fixed, and submitted for formal review against the parser MVP acceptance criteria.
+  - from_status: in-review
+    to_status: accepted
+    changed_at: "2026-03-13T19:44:00Z"
+    changed_by: human:repository.owner
+    reason: Review completed with no findings and the parser MVP slice was accepted as the semantic baseline implementation.
+  - from_status: accepted
+    to_status: closed
+    changed_at: "2026-03-13T19:46:00Z"
+    changed_by: human:repository.owner
+    reason: Audit and closure completed with no outstanding findings.
