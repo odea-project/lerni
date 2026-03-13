@@ -1,0 +1,102 @@
+id: TASK-2026-0019
+title: Refine browser viewer visual design MVP
+status: closed
+summary: >-
+  Refine the minimal browser viewer into a calmer, more modern visual system by
+  reducing nested card styling, slimming the header chrome, and emphasizing the
+  slide content with cleaner surfaces.
+requester: human:repository.owner
+business_owner: human:repository.owner
+technical_owner: human:repo.maintainer
+proposer: agent:repo-bootstrapper
+executor: agent:browser-navigation-implementer
+reviewer: human:repository.owner
+approver: human:repository.owner
+auditor: human:repository.owner
+created_at: "2026-03-14T00:12:00Z"
+updated_at: "2026-03-14T00:28:00Z"
+due_date: null
+priority: normal
+risk_tier: low
+change_type: code
+systems_affected:
+  - browser-renderer
+  - browser-layout
+  - browser-visual-design
+  - browser-validation
+data_classification: internal
+external_effects: internal-only
+allowed_agent_actions:
+  - draft and refine task records within approved scope
+  - implement a bounded modern visual refinement for the browser viewer after explicit human approval is recorded
+  - simplify persistent browser chrome and nested container styling while preserving current functionality
+  - update minimal documentation required to explain the viewer presentation behavior
+  - run repository validation and browser-serving checks and capture outputs as evidence
+prohibited_agent_actions:
+  - widen scope into a design system, theming framework, or major interaction redesign without explicit approval
+  - remove supported browser actions or metadata access under this task
+  - bypass low-risk approval controls or self-approve code execution
+  - introduce backend, persistence, or new build dependencies under this task
+required_approvals:
+  - role: approver
+    identity: human:repository.owner
+    state: approved
+    approved_at: "2026-03-14T00:12:00Z"
+    notes: Repository owner approved the modern minimal design follow-up by requesting a calmer, less box-heavy viewer.
+linked_adr: not-required
+linked_issues: []
+linked_prs: []
+predecessor_tasks:
+  - TASK-2026-0018
+successor_tasks: []
+rollback_required: true
+evidence_required: true
+audit_scope: standard
+exceptions: []
+final_disposition: implemented
+status_history:
+  - from_status: null
+    to_status: proposed
+    changed_at: "2026-03-14T00:12:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: The viewer layout is now content-first, but the visual system still feels too box-heavy and the header chrome remains visually blunt.
+  - from_status: proposed
+    to_status: triaged
+    changed_at: "2026-03-14T00:13:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Visual refinement was separated as its own follow-up so browser presentation can improve without changing behavior scope.
+  - from_status: triaged
+    to_status: specified
+    changed_at: "2026-03-14T00:14:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Deliverables, acceptance criteria, and scope boundaries for a calmer modern viewer style were documented.
+  - from_status: specified
+    to_status: risk-assessed
+    changed_at: "2026-03-14T00:15:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: The task is low risk because it refines only the bounded browser visual layer while preserving current controls and interactions.
+  - from_status: risk-assessed
+    to_status: approved
+    changed_at: "2026-03-14T00:12:00Z"
+    changed_by: human:repository.owner
+    reason: Execution approved for a modern minimal viewer refinement focused on calmer styling and reduced visual bulk.
+  - from_status: approved
+    to_status: in-progress
+    changed_at: "2026-03-14T00:18:00Z"
+    changed_by: agent:browser-navigation-implementer
+    reason: Implementation work started for the refined viewer chrome, flatter content styling, and calmer visual system.
+  - from_status: in-progress
+    to_status: in-review
+    changed_at: "2026-03-14T00:25:00Z"
+    changed_by: agent:browser-navigation-implementer
+    reason: The modern minimal visual refinement, documentation update, and validation evidence were completed and submitted for review.
+  - from_status: in-review
+    to_status: accepted
+    changed_at: "2026-03-14T00:27:00Z"
+    changed_by: human:repository.owner
+    reason: Review completed with no findings; the viewer now feels calmer and more modern without widening scope or losing access to controls.
+  - from_status: accepted
+    to_status: closed
+    changed_at: "2026-03-14T00:28:00Z"
+    changed_by: human:repository.owner
+    reason: Audit and closure completed with no outstanding findings.

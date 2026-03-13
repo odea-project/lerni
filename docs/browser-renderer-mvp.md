@@ -69,6 +69,8 @@ On quiz slides, answer choices now support a bounded keyboard flow: Tab enters t
 
 The default browser layout now prioritizes the slide surface itself. Deck selectors, runtime state, template metadata, and browser handoff details are hidden by default behind a `Controls` panel instead of occupying persistent side boxes.
 
+The viewer styling is also intentionally calm and minimal: the header chrome is slimmer, the slide surface uses flatter and cleaner content sections, and the controls panel avoids the earlier heavy box-in-box treatment.
+
 For the simplified local workflow, use:
 
 ```text
