@@ -3,6 +3,7 @@ const pageState = {
   deck: null,
   slideIndex: 0,
   runtimes: [],
+  alertMessage: "",
 };
 
 const elements = {
@@ -10,6 +11,7 @@ const elements = {
   slideCount: document.querySelector("#slide-count"),
   deckPicker: document.querySelector("#deck-picker"),
   deckMeta: document.querySelector("#deck-meta"),
+  browserAlert: document.querySelector("#browser-alert"),
   slideTemplate: document.querySelector("#slide-template"),
   slideKind: document.querySelector("#slide-kind"),
   slideContent: document.querySelector("#slide-content"),
@@ -33,18 +35,20 @@ async function bootstrap() {
   pageState.manifest = await manifestResponse.json();
   wireEvents();
   populateDeckPicker();
-  const requestedDeckId = new URL(window.location.href).searchParams.get("deck");
-  const targetDeckId = resolveRequestedDeckId(requestedDeckId);
-  await loadDeck(targetDeckId);
+  const initialState = resolveInitialUrlState(new URL(window.location.href), pageState.manifest);
+  pageState.alertMessage = initialState.message;
+  await loadDeck(initialState.deckId, initialState.slideIndex);
 }
 
 function wireEvents() {
   elements.previousSlide.addEventListener("click", () => {
+    pageState.alertMessage = "";
     pageState.slideIndex = Math.max(0, pageState.slideIndex - 1);
     render();
   });
 
   elements.nextSlide.addEventListener("click", () => {
+    pageState.alertMessage = "";
     pageState.slideIndex = Math.min(pageState.deck.slides.length - 1, pageState.slideIndex + 1);
     render();
   });
@@ -53,6 +57,7 @@ function wireEvents() {
     const slide = getCurrentSlide();
     const runtime = getCurrentRuntime();
     if (runtime.currentRevealStep < slide.runtime.maxRevealStep) {
+      pageState.alertMessage = "";
       runtime.currentRevealStep += 1;
       render();
     }
@@ -65,6 +70,7 @@ function wireEvents() {
       return;
     }
 
+    pageState.alertMessage = "";
     runtime.feedbackVisible = true;
     const feedbackStep = firstFeedbackStep(slide);
     if (feedbackStep !== null) {
@@ -74,12 +80,14 @@ function wireEvents() {
   });
 
   elements.resetSlide.addEventListener("click", () => {
+    pageState.alertMessage = "";
     pageState.runtimes[pageState.slideIndex] = createRuntimeState(getCurrentSlide());
     render();
   });
 
   elements.deckPicker.addEventListener("change", async (event) => {
-    await loadDeck(event.target.value);
+    pageState.alertMessage = "";
+    await loadDeck(event.target.value, 0);
   });
 }
 
@@ -93,7 +101,7 @@ function populateDeckPicker() {
   });
 }
 
-async function loadDeck(deckId) {
+async function loadDeck(deckId, requestedSlideIndex = 0) {
   const manifestEntry = pageState.manifest.decks.find((entry) => entry.deckId === deckId);
   if (!manifestEntry) {
     throw new Error(`Unknown deck id: ${deckId}`);
@@ -105,11 +113,11 @@ async function loadDeck(deckId) {
   }
 
   pageState.deck = await response.json();
-  pageState.slideIndex = 0;
+  pageState.slideIndex = normalizeSlideIndex(requestedSlideIndex, pageState.deck.slides.length);
   pageState.runtimes = pageState.deck.slides.map((slide) => createRuntimeState(slide));
   elements.deckPicker.value = deckId;
   elements.deckMeta.textContent = `${manifestEntry.title} · ${manifestEntry.slideCount} slides · source ${manifestEntry.sourcePath}`;
-  updateDeckUrl(deckId);
+  updateBrowserUrl(deckId, pageState.slideIndex);
   render();
 }
 
@@ -123,9 +131,22 @@ function render() {
   elements.slideTemplate.textContent = slide.templateId;
   elements.slideKind.textContent = slide.slideKind ?? "untyped";
 
+  renderAlert();
   renderSlide(slide, runtime, snapshot);
   renderRuntime(snapshot);
   renderControls(slide, snapshot);
+  updateBrowserUrl(pageState.deck.deckId, pageState.slideIndex);
+}
+
+function renderAlert() {
+  if (!pageState.alertMessage) {
+    elements.browserAlert.classList.add("hidden");
+    elements.browserAlert.textContent = "";
+    return;
+  }
+
+  elements.browserAlert.classList.remove("hidden");
+  elements.browserAlert.textContent = pageState.alertMessage;
 }
 
 function renderSlide(slide, runtime, snapshot) {
@@ -244,6 +265,7 @@ function renderAnswerChoices(slot, runtime) {
     button.textContent = item;
     button.disabled = runtime.selectedAnswerIndex !== null;
     button.addEventListener("click", () => {
+      pageState.alertMessage = "";
       runtime.selectedAnswerIndex = index;
       render();
     });
@@ -359,15 +381,57 @@ function getCurrentRuntime() {
   return pageState.runtimes[pageState.slideIndex];
 }
 
-function resolveRequestedDeckId(requestedDeckId) {
-  if (requestedDeckId && pageState.manifest.decks.some((entry) => entry.deckId === requestedDeckId)) {
-    return requestedDeckId;
+function resolveInitialUrlState(url, manifest) {
+  const requestedDeckId = url.searchParams.get("deck");
+  const requestedSlide = url.searchParams.get("slide");
+  const availableDeckIds = manifest.decks.map((entry) => entry.deckId);
+  const fallbackMessages = [];
+
+  let deckId = manifest.defaultDeckId;
+  if (requestedDeckId) {
+    if (availableDeckIds.includes(requestedDeckId)) {
+      deckId = requestedDeckId;
+    } else {
+      fallbackMessages.push(`Unknown deck '${requestedDeckId}'. Showing '${manifest.defaultDeckId}' instead.`);
+    }
   }
-  return pageState.manifest.defaultDeckId;
+
+  const selectedDeck = manifest.decks.find((entry) => entry.deckId === deckId);
+  const slideCount = selectedDeck ? selectedDeck.slideCount : 1;
+
+  let slideIndex = 0;
+  if (requestedSlide !== null) {
+    const parsedSlide = Number.parseInt(requestedSlide, 10);
+    if (Number.isNaN(parsedSlide) || parsedSlide < 1) {
+      fallbackMessages.push(`Invalid slide '${requestedSlide}'. Showing slide 1 instead.`);
+    } else if (parsedSlide > slideCount) {
+      slideIndex = Math.max(0, slideCount - 1);
+      fallbackMessages.push(`Slide '${requestedSlide}' is out of range. Showing slide ${slideCount} instead.`);
+    } else {
+      slideIndex = parsedSlide - 1;
+    }
+  }
+
+  return {
+    deckId,
+    slideIndex,
+    message: fallbackMessages.join(" "),
+  };
 }
 
-function updateDeckUrl(deckId) {
+function updateBrowserUrl(deckId, slideIndex) {
   const url = new URL(window.location.href);
   url.searchParams.set("deck", deckId);
+  url.searchParams.set("slide", String(slideIndex + 1));
   window.history.replaceState({}, "", url);
+}
+
+function normalizeSlideIndex(slideIndex, slideCount) {
+  if (slideCount <= 0) {
+    return 0;
+  }
+  if (slideIndex < 0) {
+    return 0;
+  }
+  return Math.min(slideIndex, slideCount - 1);
 }

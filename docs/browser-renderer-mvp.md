@@ -53,6 +53,13 @@ Then serve the `web/` directory with a static HTTP server such as Python's built
 
 The browser will load the default deck from the manifest unless a specific `deck` query parameter is provided.
 
+Supported URL parameters:
+
+- `?deck=<deck-id>` selects a deck from the manifest
+- `?slide=<n>` selects a 1-based slide index inside the chosen deck
+
+If `deck` or `slide` is invalid, the browser falls back predictably and shows a visible message instead of breaking the page.
+
 For the simplified local workflow, use:
 
 ```text

@@ -107,6 +107,20 @@ button {
   backdrop-filter: blur(14px);
 }
 
+.browser-alert {
+  margin-bottom: 18px;
+  padding: 14px 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(201, 95, 71, 0.22);
+  background: rgba(201, 95, 71, 0.12);
+  color: #6b281b;
+  box-shadow: 0 12px 26px rgba(201, 95, 71, 0.12);
+}
+
+.browser-alert.hidden {
+  display: none;
+}
+
 .picker-label {
   font-size: 0.9rem;
   text-transform: uppercase;

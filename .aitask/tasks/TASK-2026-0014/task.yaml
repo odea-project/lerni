@@ -1,0 +1,102 @@
+id: TASK-2026-0014
+title: Implement browser URL state and parameter fallback MVP
+status: closed
+summary: >-
+  Implement a bounded browser URL-state layer so deck and slide selection can be
+  deep-linked and invalid URL parameters fall back predictably without breaking the
+  static browser experience.
+requester: human:repository.owner
+business_owner: human:repository.owner
+technical_owner: human:repo.maintainer
+proposer: agent:repo-bootstrapper
+executor: agent:browser-url-state-implementer
+reviewer: human:repository.owner
+approver: human:repository.owner
+auditor: human:repository.owner
+created_at: "2026-03-13T22:23:00Z"
+updated_at: "2026-03-13T22:28:00Z"
+due_date: null
+priority: normal
+risk_tier: low
+change_type: code
+systems_affected:
+  - browser-renderer
+  - browser-url-state
+  - local-static-site
+data_classification: internal
+external_effects: internal-only
+allowed_agent_actions:
+  - draft and refine task records within approved scope
+  - implement a minimal browser URL-state and fallback layer after explicit human approval is recorded
+  - add focused validation evidence for deck and slide deep-link behavior
+  - update minimal documentation required to explain the URL-state behavior
+  - run repository validation and test commands and capture outputs as evidence
+prohibited_agent_actions:
+  - widen scope into a general client-side router or application framework without explicit approval
+  - replace the existing manifest-driven deck-loading model under this task
+  - bypass low-risk approval controls or self-approve code execution
+  - introduce backend services or persistence under this task
+required_approvals:
+  - role: approver
+    identity: human:repository.owner
+    state: approved
+    approved_at: "2026-03-13T22:26:00Z"
+    notes: Repository owner approved the bounded browser URL-state and fallback implementation step.
+linked_adr: not-required
+linked_issues: []
+linked_prs: []
+predecessor_tasks:
+  - TASK-2026-0012
+  - TASK-2026-0013
+successor_tasks: []
+rollback_required: true
+evidence_required: true
+audit_scope: standard
+exceptions: []
+final_disposition: implemented
+status_history:
+  - from_status: null
+    to_status: proposed
+    changed_at: "2026-03-13T22:23:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: The browser MVP now needs bounded deep-linking and predictable fallback behavior for deck and slide parameters.
+  - from_status: proposed
+    to_status: triaged
+    changed_at: "2026-03-13T22:24:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: URL-state and parameter fallback work was separated from the broader browser site build so browser navigation behavior can evolve without widening the architecture.
+  - from_status: triaged
+    to_status: specified
+    changed_at: "2026-03-13T22:25:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Deliverables, acceptance criteria, and scope boundaries for browser URL-state behavior were documented.
+  - from_status: specified
+    to_status: risk-assessed
+    changed_at: "2026-03-13T22:26:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: The task is low risk because it adds bounded client-side parameter handling and fallback behavior around the existing static browser renderer.
+  - from_status: risk-assessed
+    to_status: approved
+    changed_at: "2026-03-13T22:26:00Z"
+    changed_by: human:repository.owner
+    reason: Execution approved for bounded URL-state and invalid-parameter fallback handling.
+  - from_status: approved
+    to_status: in-progress
+    changed_at: "2026-03-13T22:28:00Z"
+    changed_by: agent:browser-url-state-implementer
+    reason: Implementation work started for slide deep-linking and predictable browser parameter fallback behavior.
+  - from_status: in-progress
+    to_status: in-review
+    changed_at: "2026-03-13T22:32:00Z"
+    changed_by: agent:browser-url-state-implementer
+    reason: Browser deep-linking, URL write-back, visible fallback messaging, and documentation updates were completed and submitted for review.
+  - from_status: in-review
+    to_status: accepted
+    changed_at: "2026-03-13T22:33:00Z"
+    changed_by: human:repository.owner
+    reason: Review completed with no findings; the browser URL-state stays bounded, static-host-friendly, and visibly handles invalid parameters.
+  - from_status: accepted
+    to_status: closed
+    changed_at: "2026-03-13T22:34:00Z"
+    changed_by: human:repository.owner
+    reason: Audit and closure completed with no outstanding findings.
