@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lerni Browser MVP</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero-bar">
+        <div>
+          <p class="eyebrow">Browser Renderer MVP</p>
+          <h1>Lerni in the Browser</h1>
+        </div>
+        <div class="hero-status">
+          <span id="deck-id" class="status-chip">Loading deck...</span>
+          <span id="slide-count" class="status-chip muted">0 / 0</span>
+        </div>
+      </header>
+
+      <main class="workspace-grid">
+        <section class="slide-stage">
+          <div class="stage-topbar">
+            <button id="previous-slide" class="nav-button" type="button">Previous</button>
+            <div class="stage-summary">
+              <span id="slide-template" class="summary-pill">Template</span>
+              <span id="slide-kind" class="summary-pill muted">Kind</span>
+            </div>
+            <button id="next-slide" class="nav-button" type="button">Next</button>
+          </div>
+
+          <article id="slide-card" class="slide-card">
+            <div id="slide-content" class="slide-content"></div>
+          </article>
+        </section>
+
+        <aside class="control-panel">
+          <section class="panel-block">
+            <h2>Runtime State</h2>
+            <dl id="runtime-state" class="state-list"></dl>
+          </section>
+
+          <section class="panel-block">
+            <h2>Slide Actions</h2>
+            <div class="control-stack">
+              <button id="advance-reveal" class="action-button amber" type="button">Advance Reveal</button>
+              <button id="show-feedback" class="action-button coral" type="button">Show Feedback</button>
+              <button id="reset-slide" class="action-button slate" type="button">Reset Slide</button>
+            </div>
+          </section>
+
+          <section class="panel-block">
+            <h2>Browser Handoff</h2>
+            <p class="panel-copy">
+              This page consumes exported slide structure and bounded runtime metadata. It does not parse Markdown or run Python in the browser.
+            </p>
+            <pre id="snapshot-preview" class="snapshot-preview"></pre>
+          </section>
+        </aside>
+      </main>
+    </div>
+
+    <template id="block-template">
+      <section class="content-block"></section>
+    </template>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

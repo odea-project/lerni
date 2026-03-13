@@ -1,3 +1,4 @@
+from .browser_export import build_browser_payload_from_source, write_browser_payload
 from .document_model import Block, Deck, InteractionReference, Region, RevealGroup, Slide
 from .interaction_runtime import InteractionRuntimeError, RuntimeSlotVisibility, SlideRuntimeSnapshot, create_slide_runtime
 from .parser import ParseError, parse_document
@@ -5,6 +6,8 @@ from .template_resolution import ResolvedSlot, ResolvedTemplateSlide, Resolution
 
 __all__ = [
     "Block",
+    "build_browser_payload_from_source",
+    "write_browser_payload",
     "Deck",
     "InteractionReference",
     "InteractionRuntimeError",

@@ -1,0 +1,104 @@
+id: TASK-2026-0011
+title: Implement the browser renderer MVP
+status: closed
+summary: >-
+  Implement the first browser-facing renderer slice that consumes the resolved slide
+  structure and bounded runtime contract to execute interactive learning slides in a
+  web page without widening into a full application framework.
+requester: human:repository.owner
+business_owner: human:repository.owner
+technical_owner: human:repo.maintainer
+proposer: agent:repo-bootstrapper
+executor: agent:browser-renderer-implementer
+reviewer: human:repository.owner
+approver: human:repository.owner
+auditor: human:repository.owner
+created_at: "2026-03-13T21:00:00Z"
+updated_at: "2026-03-13T21:05:00Z"
+due_date: null
+priority: high
+risk_tier: medium
+change_type: code
+systems_affected:
+  - browser-renderer
+  - browser-demo-export
+  - interaction-runtime-handoff
+  - static-web-assets
+data_classification: internal
+external_effects: internal-only
+allowed_agent_actions:
+  - draft and refine task records within approved scope
+  - implement a minimal browser renderer that consumes the existing bounded deck and runtime contracts after explicit human approval is recorded
+  - add focused tests and fixtures needed to validate browser payload generation and supported UI behavior boundaries
+  - update minimal documentation required to explain implemented browser behavior
+  - run repository validation and test commands and capture outputs as evidence
+prohibited_agent_actions:
+  - widen browser scope into a general frontend framework or application platform without explicit approval
+  - replace the existing parser, template-resolution, or runtime responsibilities under this task
+  - bypass medium-risk approval controls or self-approve code execution
+  - introduce networking backends, persistence, or analytics behavior under this task
+required_approvals:
+  - role: approver
+    identity: human:repository.owner
+    state: approved
+    approved_at: "2026-03-13T21:03:00Z"
+    notes: Repository owner approved the bounded browser-renderer MVP implementation step.
+linked_adr: not-required
+linked_issues: []
+linked_prs: []
+predecessor_tasks:
+  - TASK-2026-0008
+  - TASK-2026-0009
+  - TASK-2026-0010
+successor_tasks: []
+rollback_required: true
+evidence_required: true
+audit_scope: standard
+exceptions: []
+final_disposition: implemented
+status_history:
+  - from_status: null
+    to_status: proposed
+    changed_at: "2026-03-13T21:00:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Browser execution is the next implementation layer after parser, template resolution, and interaction runtime were completed.
+  - from_status: proposed
+    to_status: triaged
+    changed_at: "2026-03-13T21:01:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: The browser renderer scope was separated from core Python modeling so browser delivery can evolve without distorting the bounded core contracts.
+  - from_status: triaged
+    to_status: specified
+    changed_at: "2026-03-13T21:02:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Deliverables, acceptance criteria, and code-scope boundaries for the browser renderer MVP were documented.
+  - from_status: specified
+    to_status: risk-assessed
+    changed_at: "2026-03-13T21:03:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: The task is medium risk because it introduces executable browser behavior and static delivery assets while still remaining bounded and reviewable.
+  - from_status: risk-assessed
+    to_status: approved
+    changed_at: "2026-03-13T21:03:00Z"
+    changed_by: human:repository.owner
+    reason: Execution approved for a bounded browser renderer that consumes the existing structural and runtime contracts.
+  - from_status: approved
+    to_status: in-progress
+    changed_at: "2026-03-13T21:05:00Z"
+    changed_by: agent:browser-renderer-implementer
+    reason: Implementation work started for the first browser-facing renderer and demo export path.
+  - from_status: in-progress
+    to_status: in-review
+    changed_at: "2026-03-13T21:18:00Z"
+    changed_by: agent:browser-renderer-implementer
+    reason: Browser export, static renderer assets, generated demo payload, and supporting tests were completed and submitted for review.
+  - from_status: in-review
+    to_status: accepted
+    changed_at: "2026-03-13T21:19:00Z"
+    changed_by: human:repository.owner
+    reason: Review completed with no findings; the browser renderer remains bounded and proves the web execution target against the existing contracts.
+  - from_status: accepted
+    to_status: closed
+    changed_at: "2026-03-13T21:20:00Z"
+    changed_by: human:repository.owner
+    reason: Audit and closure completed with no outstanding findings.
