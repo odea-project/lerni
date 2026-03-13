@@ -1,0 +1,11 @@
+version: 1
+last_updated: 2026-03-13T12:15:00Z
+findings:
+  - finding_id: FINDING-2026-0001
+    source_audit_id: AUDIT-2026-0001
+    task_id: TASK-EXAMPLE-0001
+    severity: info
+    summary: Placeholder CODEOWNERS identities must be replaced with actual organization teams.
+    remediation_owner: human:repo.maintainer
+    target_date: 2026-03-20
+    status: open

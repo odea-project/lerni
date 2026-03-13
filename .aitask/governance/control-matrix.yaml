@@ -1,0 +1,40 @@
+version: 1
+last_reviewed: 2026-03-13
+controls:
+  low:
+    required:
+      - task record complete before merge
+      - risk assessment recorded
+      - execution log entries for meaningful actions
+      - review record with decision
+    conditional:
+      - adr if architectural or governance decision is made
+  medium:
+    required:
+      - all low controls
+      - explicit human approval before execution
+      - executor distinct from approver
+      - evidence index completed before closure
+      - pull request checklist completed
+    conditional:
+      - rollback plan if code or configuration changes are made
+  high:
+    required:
+      - all medium controls
+      - proposer, executor, reviewer, and approver separation where feasible
+      - rollback plan mandatory
+      - linked ADR or documented not-required rationale
+      - audit record before closure
+      - waiver for any unmet control
+    conditional:
+      - additional domain review for security, privacy, or compliance scope
+  critical:
+    required:
+      - all high controls
+      - human-owned execution
+      - agent actions tightly constrained and listed step-by-step
+      - pre-approved rollback and contingency plan
+      - independent audit before acceptance
+      - no self-approval by agents under any circumstance
+    conditional:
+      - change window and incident-ready communications as applicable

@@ -1,0 +1,39 @@
+name: Governance Change Request
+description: Propose a change to `.aitask` governance, controls, or operating procedures.
+title: "[Governance]: "
+labels:
+  - governance
+body:
+  - type: input
+    id: summary
+    attributes:
+      label: Change summary
+      description: State the policy or control change requested.
+    validations:
+      required: true
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Rationale
+      description: Explain why the governance change is needed.
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Expected impact
+      description: Describe task lifecycle, control, approval, or audit impact.
+    validations:
+      required: true
+  - type: textarea
+    id: adr_need
+    attributes:
+      label: ADR impact
+      description: State whether an ADR is required and why.
+    validations:
+      required: true
+  - type: textarea
+    id: rollout
+    attributes:
+      label: Rollout and backout plan
+      description: Describe how the governance change will be introduced or reversed.

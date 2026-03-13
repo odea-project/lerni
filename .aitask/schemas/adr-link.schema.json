@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/aitask/schemas/adr-link.schema.json",
+  "title": "ADR Link",
+  "oneOf": [
+    {
+      "type": "string",
+      "enum": ["not-required"]
+    },
+    {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^\\.aitask/adrs/ADR-\\d{4}-\\d{4}-[a-z0-9-]+\\.md$"
+      }
+    }
+  ]
+}

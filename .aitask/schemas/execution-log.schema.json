@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/aitask/schemas/execution-log.schema.json",
+  "title": "Execution Log Entry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["timestamp", "actor", "step", "reason", "files_changed", "commands_run", "outputs", "deviations", "follow_up_actions"],
+  "properties": {
+    "timestamp": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+    },
+    "actor": {
+      "type": "string",
+      "pattern": "^(human|agent|svc):[A-Za-z0-9._-]+$"
+    },
+    "step": {
+      "type": "string"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "files_changed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "commands_run": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "deviations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "follow_up_actions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

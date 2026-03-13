@@ -1,0 +1,98 @@
+id: TASK-EXAMPLE-0001
+title: Bootstrap example records for the .aitask operating system
+status: closed
+summary: >-
+  Demonstrates the full governed lifecycle for a harmless repository documentation and
+  governance bootstrap task, including specification, risk assessment, ADR linkage,
+  execution evidence, review, audit, and closure.
+requester: human:repository.owner
+business_owner: human:repository.owner
+technical_owner: human:repo.maintainer
+proposer: agent:repo-bootstrapper
+executor: agent:repo-bootstrapper
+reviewer: human:governance.reviewer
+approver: human:repo.approver
+auditor: human:internal.auditor
+created_at: "2026-03-13T09:00:00Z"
+updated_at: "2026-03-13T12:30:00Z"
+due_date: null
+priority: normal
+risk_tier: low
+change_type: governance
+systems_affected:
+  - repository-governance
+  - github-workflows
+data_classification: internal
+external_effects: internal-only
+allowed_agent_actions:
+  - draft markdown, yaml, json, and workflow files for the approved bootstrap scope
+  - run repository validation commands and capture outputs in task evidence
+prohibited_agent_actions:
+  - self-approve the task
+  - change repository settings outside documented manual hardening guidance
+  - execute destructive git history operations
+required_approvals:
+  - role: approver
+    identity: human:repo.approver
+    state: approved
+    approved_at: "2026-03-13T09:20:00Z"
+    notes: Approved low-risk governance bootstrap for repository-local assets.
+linked_adr:
+  - .aitask/adrs/ADR-2026-0001-adopt-aitask-operating-system.md
+linked_issues:
+  - "issue:bootstrap-example"
+linked_prs:
+  - "pr:bootstrap-example"
+predecessor_tasks: []
+successor_tasks: []
+rollback_required: true
+evidence_required: true
+audit_scope: standard
+exceptions: []
+final_disposition: implemented
+status_history:
+  - from_status: null
+    to_status: proposed
+    changed_at: "2026-03-13T09:00:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Example task record opened.
+  - from_status: proposed
+    to_status: triaged
+    changed_at: "2026-03-13T09:05:00Z"
+    changed_by: human:repository.owner
+    reason: Ownership and scope confirmed.
+  - from_status: triaged
+    to_status: specified
+    changed_at: "2026-03-13T09:10:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Specification and templates drafted.
+  - from_status: specified
+    to_status: risk-assessed
+    changed_at: "2026-03-13T09:15:00Z"
+    changed_by: human:repo.maintainer
+    reason: Risk assessed as low for repository-local governance assets.
+  - from_status: risk-assessed
+    to_status: approved
+    changed_at: "2026-03-13T09:20:00Z"
+    changed_by: human:repo.approver
+    reason: Human execution approval recorded.
+  - from_status: approved
+    to_status: in-progress
+    changed_at: "2026-03-13T09:30:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Bootstrap execution started.
+  - from_status: in-progress
+    to_status: in-review
+    changed_at: "2026-03-13T11:45:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Draft implementation complete and evidence assembled.
+  - from_status: in-review
+    to_status: accepted
+    changed_at: "2026-03-13T12:00:00Z"
+    changed_by: human:governance.reviewer
+    reason: Review completed with no blocking findings.
+  - from_status: accepted
+    to_status: closed
+    changed_at: "2026-03-13T12:30:00Z"
+    changed_by: human:repo.approver
+    reason: Closure approved after audit completion.

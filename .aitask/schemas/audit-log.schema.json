@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/aitask/schemas/audit-log.schema.json",
+  "title": "Audit Log Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["audit_id", "audit_date", "auditor", "task_scope", "records_inspected", "control_checks", "findings", "closure_status"],
+  "properties": {
+    "audit_id": {
+      "type": "string",
+      "pattern": "^AUDIT-\\d{4}-\\d{4}$"
+    },
+    "audit_date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+    },
+    "auditor": {
+      "type": "string",
+      "pattern": "^(human|agent|svc):[A-Za-z0-9._-]+$"
+    },
+    "task_scope": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^TASK-(\\d{4}|EXAMPLE)-\\d{4}$"
+      }
+    },
+    "records_inspected": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "control_checks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["severity", "summary", "remediation", "status"],
+        "properties": {
+          "severity": {
+            "type": "string",
+            "enum": ["info", "low", "medium", "high", "critical"]
+          },
+          "summary": {
+            "type": "string"
+          },
+          "remediation": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["open", "in-progress", "closed", "accepted"]
+          }
+        }
+      }
+    },
+    "closure_status": {
+      "type": "string",
+      "enum": ["open", "closed", "follow-up-required"]
+    }
+  }
+}

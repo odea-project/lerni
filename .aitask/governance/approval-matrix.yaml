@@ -1,0 +1,61 @@
+version: 1
+last_reviewed: 2026-03-13
+tiers:
+  low:
+    execution_approval:
+      minimum_human_approvals: 1
+      required_roles:
+        - approver
+    acceptance_approval:
+      minimum_human_approvals: 1
+      required_roles:
+        - reviewer
+    notes:
+      - Reviewer and approver may be the same human if independent judgment is preserved.
+  medium:
+    execution_approval:
+      minimum_human_approvals: 1
+      required_roles:
+        - approver
+    acceptance_approval:
+      minimum_human_approvals: 1
+      required_roles:
+        - reviewer
+    mandatory_separation:
+      - executor != approver
+    notes:
+      - Human approval required before execution starts.
+  high:
+    execution_approval:
+      minimum_human_approvals: 2
+      required_roles:
+        - approver
+        - business_owner
+    acceptance_approval:
+      minimum_human_approvals: 1
+      required_roles:
+        - reviewer
+    mandatory_separation:
+      - proposer != approver
+      - executor != approver
+      - reviewer != approver
+    notes:
+      - Rollback plan and explicit evidence plan are mandatory.
+  critical:
+    execution_approval:
+      minimum_human_approvals: 2
+      required_roles:
+        - approver
+        - business_owner
+    acceptance_approval:
+      minimum_human_approvals: 2
+      required_roles:
+        - reviewer
+        - approver
+    mandatory_separation:
+      - proposer != approver
+      - executor != approver
+      - reviewer != approver
+    notes:
+      - Autonomous execution is prohibited.
+      - Execution must be human-owned; agents may only assist within explicitly approved steps.

@@ -1,0 +1,55 @@
+name: AI Task Proposal
+description: Propose a new governed AI-assisted task.
+title: "[AI Task]: "
+labels:
+  - ai-task
+body:
+  - type: input
+    id: title
+    attributes:
+      label: Proposed task title
+      description: Use a short, specific title.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Describe the business or engineering context.
+    validations:
+      required: true
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+      description: State the intended outcome.
+    validations:
+      required: true
+  - type: dropdown
+    id: suggested_risk_tier
+    attributes:
+      label: Suggested risk tier
+      options:
+        - low
+        - medium
+        - high
+        - critical
+    validations:
+      required: true
+  - type: textarea
+    id: systems_affected
+    attributes:
+      label: Systems affected
+      description: List repository components or external systems.
+    validations:
+      required: true
+  - type: textarea
+    id: approvals_needed
+    attributes:
+      label: Known approvals needed
+      description: List any required approvers or oversight roles.
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints and non-negotiables
+      description: Include compliance, privacy, security, or timing constraints.

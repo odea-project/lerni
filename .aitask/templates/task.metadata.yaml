@@ -1,0 +1,49 @@
+id: TASK-YYYY-NNNN
+title: Short, specific title
+status: proposed
+summary: >-
+  One paragraph summary of the task, the intended change, and why it matters.
+requester: human:requester.name
+business_owner: human:business.owner
+technical_owner: human:technical.owner
+proposer: human:proposer.name
+executor: agent:assigned-agent
+reviewer: human:reviewer.name
+approver: human:approver.name
+auditor: human:auditor.name
+created_at: "2026-03-13T00:00:00Z"
+updated_at: "2026-03-13T00:00:00Z"
+due_date: null
+priority: normal
+risk_tier: low
+change_type: documentation
+systems_affected:
+  - repository-docs
+data_classification: internal
+external_effects: internal-only
+allowed_agent_actions:
+  - draft markdown files within approved scope
+prohibited_agent_actions:
+  - merge without required human approvals
+required_approvals:
+  - role: approver
+    identity: human:approver.name
+    state: pending
+    approved_at: null
+    notes: Initial execution approval.
+linked_adr: not-required
+linked_issues: []
+linked_prs: []
+predecessor_tasks: []
+successor_tasks: []
+rollback_required: false
+evidence_required: true
+audit_scope: light
+exceptions: []
+final_disposition: open
+status_history:
+  - from_status: null
+    to_status: proposed
+    changed_at: "2026-03-13T00:00:00Z"
+    changed_by: human:proposer.name
+    reason: Task created.

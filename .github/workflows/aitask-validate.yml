@@ -1,0 +1,37 @@
+name: aitask-validate
+
+on:
+  pull_request:
+    paths:
+      - '.aitask/**'
+      - '.github/**'
+      - 'docs/**'
+      - 'tools/**'
+  push:
+    branches:
+      - main
+    paths:
+      - '.aitask/**'
+      - '.github/**'
+      - 'docs/**'
+      - 'tools/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install validation dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pyyaml jsonschema
+
+      - name: Validate .aitask assets
+        run: python tools/validate_aitask.py --root .
