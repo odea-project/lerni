@@ -1,0 +1,98 @@
+id: TASK-2026-0001
+title: Define the formal project description and product vision
+status: closed
+summary: >-
+  Prepare and govern the first formal product-definition document for this repository,
+  covering project identity, problem statement, target users, differentiators,
+  design principles, interaction model direction, likely MVP scope, and explicit non-goals.
+requester: human:repository.owner
+business_owner: human:repository.owner
+technical_owner: human:repo.maintainer
+proposer: agent:repo-bootstrapper
+executor: agent:vision-drafter
+reviewer: human:repository.owner
+approver: human:repository.owner
+auditor: human:repository.owner
+created_at: "2026-03-13T13:15:00Z"
+updated_at: "2026-03-13T14:20:00Z"
+due_date: null
+priority: high
+risk_tier: low
+change_type: documentation
+systems_affected:
+  - repository-docs
+  - product-definition
+data_classification: internal
+external_effects: internal-only
+allowed_agent_actions:
+  - draft and refine task records within the approved scope
+  - draft docs/project-vision.md after human approval is recorded
+  - propose structured comparisons, scope boundaries, and product principles using repository artifacts
+  - run repository validation commands and capture outputs as evidence
+prohibited_agent_actions:
+  - self-approve the task
+  - expand the task from product definition into product implementation
+  - create architecture commitments that require an ADR without explicit human direction
+  - alter governance controls to make approval easier
+required_approvals:
+  - role: approver
+    identity: human:repository.owner
+    state: approved
+    approved_at: "2026-03-13T13:30:00Z"
+    notes: Execution approval recorded from the repository owner's instruction to advance the task to the next sensible phase.
+linked_adr: not-required
+linked_issues: []
+linked_prs: []
+predecessor_tasks: []
+successor_tasks: []
+rollback_required: true
+evidence_required: true
+audit_scope: light
+exceptions: []
+final_disposition: implemented
+status_history:
+  - from_status: null
+    to_status: proposed
+    changed_at: "2026-03-13T13:05:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Live task opened from user-supplied project context.
+  - from_status: proposed
+    to_status: triaged
+    changed_at: "2026-03-13T13:08:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Task ownership, document target, and product-definition scope identified.
+  - from_status: triaged
+    to_status: specified
+    changed_at: "2026-03-13T13:12:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Specification, deliverables, key questions, and review expectations documented.
+  - from_status: specified
+    to_status: risk-assessed
+    changed_at: "2026-03-13T13:15:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Documentation-oriented work assessed as low risk with explicit approval and evidence controls.
+  - from_status: risk-assessed
+    to_status: approved
+    changed_at: "2026-03-13T13:30:00Z"
+    changed_by: human:repository.owner
+    reason: Repository owner instructed the task to advance to the next sensible phase, recorded as execution approval for this low-risk documentation task.
+  - from_status: approved
+    to_status: in-progress
+    changed_at: "2026-03-13T13:45:00Z"
+    changed_by: agent:vision-drafter
+    reason: Drafting of the first project vision document has started under recorded approval.
+  - from_status: in-progress
+    to_status: in-review
+    changed_at: "2026-03-13T14:00:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Draft completed and submitted for formal review against the task acceptance criteria.
+  - from_status: in-review
+    to_status: accepted
+    changed_at: "2026-03-13T14:05:00Z"
+    changed_by: human:repository.owner
+    reason: Review completed with no findings; the draft satisfies the low-risk task acceptance criteria.
+  - from_status: accepted
+    to_status: closed
+    changed_at: "2026-03-13T14:20:00Z"
+    changed_by: human:repository.owner
+    reason: Light audit and closure completed; required evidence is present and the task outcome is implemented.

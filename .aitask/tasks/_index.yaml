@@ -1,6 +1,11 @@
 version: 1
-last_updated: 2026-03-13T00:00:00Z
+last_updated: 2026-03-13T14:20:00Z
 tasks:
+  - id: TASK-2026-0001
+    path: .aitask/tasks/TASK-2026-0001
+    status: closed
+    kind: live
+    title: Define the formal project description and product vision
   - id: TASK-EXAMPLE-0001
     path: .aitask/tasks/examples/TASK-EXAMPLE-0001
     status: closed
