@@ -38,6 +38,7 @@ The static renderer currently supports:
 - explicit feedback reveal
 - slide reset
 - manifest-driven deck selection by picker or `?deck=` URL parameter
+- minimal content-first viewer layout with an on-demand controls and details panel
 
 The browser layer remains intentionally bounded. It is not a framework, editor, backend, or general state platform.
 
@@ -65,6 +66,8 @@ The page now also exposes a direct slide picker, which stays synchronized with t
 The browser also exposes a small fixed shortcut set for the existing actions: Left for previous slide, Right for next slide, Space for reveal advancement, `F` for feedback, and `R` for reset. These shortcuts are ignored while form controls or buttons are focused.
 
 On quiz slides, answer choices now support a bounded keyboard flow: Tab enters the choice list, arrow keys move focus between choices, and Enter or Space selects the focused answer. After selection, focus moves to the feedback action when it is available.
+
+The default browser layout now prioritizes the slide surface itself. Deck selectors, runtime state, template metadata, and browser handoff details are hidden by default behind a `Controls` panel instead of occupying persistent side boxes.
 
 For the simplified local workflow, use:
 

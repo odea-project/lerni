@@ -8,34 +8,25 @@
   </head>
   <body>
     <div class="page-shell">
-      <header class="hero-bar">
-        <div>
-          <p class="eyebrow">Browser Renderer MVP</p>
-          <h1>Lerni in the Browser</h1>
-        </div>
-        <div class="hero-status">
+      <header class="viewer-chrome">
+        <p class="viewer-brand">Lerni Browser</p>
+        <div class="viewer-status">
           <span id="deck-id" class="status-chip">Loading deck...</span>
           <span id="slide-count" class="status-chip muted">0 / 0</span>
         </div>
+        <button id="toggle-meta" class="meta-toggle" type="button" aria-expanded="false" aria-controls="meta-panel">Controls</button>
       </header>
-
-      <section class="deck-switcher">
-        <label class="picker-label" for="deck-picker">Deck</label>
-        <select id="deck-picker" class="deck-picker"></select>
-        <label class="picker-label" for="slide-picker">Slide</label>
-        <select id="slide-picker" class="deck-picker slide-picker"></select>
-        <p id="deck-meta" class="deck-meta">Loading deck manifest...</p>
-      </section>
 
       <section id="browser-alert" class="browser-alert hidden" aria-live="polite"></section>
 
-      <main class="workspace-grid">
+      <main class="viewer-layout">
         <section class="slide-stage">
           <div class="stage-topbar">
             <button id="previous-slide" class="nav-button" type="button">Previous</button>
-            <div class="stage-summary">
-              <span id="slide-template" class="summary-pill">Template</span>
-              <span id="slide-kind" class="summary-pill muted">Kind</span>
+            <div class="stage-actions">
+              <button id="advance-reveal" class="action-button amber" type="button">Reveal</button>
+              <button id="show-feedback" class="action-button coral" type="button">Feedback</button>
+              <button id="reset-slide" class="action-button slate" type="button">Reset</button>
             </div>
             <button id="next-slide" class="nav-button" type="button">Next</button>
           </div>
@@ -44,32 +35,50 @@
             <div id="slide-content" class="slide-content"></div>
           </article>
         </section>
-
-        <aside class="control-panel">
-          <section class="panel-block">
-            <h2>Runtime State</h2>
-            <dl id="runtime-state" class="state-list"></dl>
-          </section>
-
-          <section class="panel-block">
-            <h2>Slide Actions</h2>
-            <div class="control-stack">
-              <button id="advance-reveal" class="action-button amber" type="button">Advance Reveal</button>
-              <button id="show-feedback" class="action-button coral" type="button">Show Feedback</button>
-              <button id="reset-slide" class="action-button slate" type="button">Reset Slide</button>
-            </div>
-            <p class="shortcut-hint">Shortcuts: Left previous, Right next, Space reveal, F feedback, R reset.</p>
-          </section>
-
-          <section class="panel-block">
-            <h2>Browser Handoff</h2>
-            <p class="panel-copy">
-              This page consumes exported slide structure and bounded runtime metadata. It does not parse Markdown or run Python in the browser.
-            </p>
-            <pre id="snapshot-preview" class="snapshot-preview"></pre>
-          </section>
-        </aside>
       </main>
+
+      <div id="meta-backdrop" class="meta-backdrop hidden"></div>
+
+      <aside id="meta-panel" class="meta-panel hidden" aria-hidden="true">
+        <div class="meta-panel-header">
+          <div>
+            <p class="eyebrow">On-Demand Controls</p>
+            <h2>Viewer Details</h2>
+          </div>
+          <button id="close-meta" class="meta-close" type="button">Close</button>
+        </div>
+
+        <section class="meta-section panel-block">
+          <h2>Navigation</h2>
+          <label class="picker-label" for="deck-picker">Deck</label>
+          <select id="deck-picker" class="deck-picker"></select>
+          <label class="picker-label" for="slide-picker">Slide</label>
+          <select id="slide-picker" class="deck-picker slide-picker"></select>
+          <p id="deck-meta" class="deck-meta">Loading deck manifest...</p>
+        </section>
+
+        <section class="meta-section panel-block">
+          <h2>Slide Details</h2>
+          <div class="meta-chip-row">
+            <span id="slide-template" class="summary-pill">Template</span>
+            <span id="slide-kind" class="summary-pill muted">Kind</span>
+          </div>
+          <p class="shortcut-hint">Shortcuts: Left previous, Right next, Space reveal, F feedback, R reset.</p>
+        </section>
+
+        <section class="meta-section panel-block">
+          <h2>Runtime State</h2>
+          <dl id="runtime-state" class="state-list"></dl>
+        </section>
+
+        <section class="meta-section panel-block">
+          <h2>Browser Handoff</h2>
+          <p class="panel-copy">
+            This page consumes exported slide structure and bounded runtime metadata. It does not parse Markdown or run Python in the browser.
+          </p>
+          <pre id="snapshot-preview" class="snapshot-preview"></pre>
+        </section>
+      </aside>
     </div>
 
     <template id="block-template">

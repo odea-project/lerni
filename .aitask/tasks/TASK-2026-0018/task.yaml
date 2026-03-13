@@ -1,0 +1,102 @@
+id: TASK-2026-0018
+title: Implement minimal browser viewer layout MVP
+status: closed
+summary: >-
+  Refine the browser renderer layout so the slide uses most of the viewport by
+  default while runtime and deck metadata remain quickly available through an
+  on-demand control panel instead of persistent side boxes.
+requester: human:repository.owner
+business_owner: human:repository.owner
+technical_owner: human:repo.maintainer
+proposer: agent:repo-bootstrapper
+executor: agent:browser-navigation-implementer
+reviewer: human:repository.owner
+approver: human:repository.owner
+auditor: human:repository.owner
+created_at: "2026-03-13T23:48:00Z"
+updated_at: "2026-03-14T00:05:00Z"
+due_date: null
+priority: normal
+risk_tier: low
+change_type: code
+systems_affected:
+  - browser-renderer
+  - browser-navigation-ui
+  - browser-layout
+  - browser-validation
+data_classification: internal
+external_effects: internal-only
+allowed_agent_actions:
+  - draft and refine task records within approved scope
+  - implement a minimal content-first browser layout after explicit human approval is recorded
+  - move runtime and deck metadata behind an on-demand control surface while preserving current functionality
+  - update minimal documentation required to explain the viewer layout behavior
+  - run repository validation and browser-serving checks and capture outputs as evidence
+prohibited_agent_actions:
+  - widen scope into a presentation framework, theming system, or route-based app shell without explicit approval
+  - remove currently supported browser actions or URL-state behavior under this task
+  - bypass low-risk approval controls or self-approve code execution
+  - introduce backend, persistence, or new build dependencies under this task
+required_approvals:
+  - role: approver
+    identity: human:repository.owner
+    state: approved
+    approved_at: "2026-03-13T23:48:00Z"
+    notes: Repository owner approved the minimal content-first layout follow-up by requesting a more slide-focused browser presentation.
+linked_adr: not-required
+linked_issues: []
+linked_prs: []
+predecessor_tasks:
+  - TASK-2026-0017
+successor_tasks: []
+rollback_required: true
+evidence_required: true
+audit_scope: standard
+exceptions: []
+final_disposition: implemented
+status_history:
+  - from_status: null
+    to_status: proposed
+    changed_at: "2026-03-13T23:48:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: The browser viewer now needs a more minimal presentation where content dominates and metadata is available on demand.
+  - from_status: proposed
+    to_status: triaged
+    changed_at: "2026-03-13T23:49:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Layout refinement was separated as its own follow-up so browser presentation can improve without widening architectural scope.
+  - from_status: triaged
+    to_status: specified
+    changed_at: "2026-03-13T23:50:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Deliverables, acceptance criteria, and scope boundaries for a minimal viewer layout were documented.
+  - from_status: specified
+    to_status: risk-assessed
+    changed_at: "2026-03-13T23:51:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: The task is low risk because it restructures only the bounded browser UI surface while keeping existing runtime behavior intact.
+  - from_status: risk-assessed
+    to_status: approved
+    changed_at: "2026-03-13T23:48:00Z"
+    changed_by: human:repository.owner
+    reason: Execution approved for a minimal browser layout that keeps metadata on demand instead of persistently visible.
+  - from_status: approved
+    to_status: in-progress
+    changed_at: "2026-03-13T23:56:00Z"
+    changed_by: agent:browser-navigation-implementer
+    reason: Implementation work started for the minimal viewer layout, control dock, and on-demand meta panel.
+  - from_status: in-progress
+    to_status: in-review
+    changed_at: "2026-03-14T00:02:00Z"
+    changed_by: agent:browser-navigation-implementer
+    reason: Minimal viewer layout, compact action dock, and on-demand controls panel were completed and submitted for review.
+  - from_status: in-review
+    to_status: accepted
+    changed_at: "2026-03-14T00:04:00Z"
+    changed_by: human:repository.owner
+    reason: Review completed with no findings; the layout now prioritizes slide content while keeping metadata quickly reachable on demand.
+  - from_status: accepted
+    to_status: closed
+    changed_at: "2026-03-14T00:05:00Z"
+    changed_by: human:repository.owner
+    reason: Audit and closure completed with no outstanding findings.

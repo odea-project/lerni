@@ -6,11 +6,16 @@ const pageState = {
   slideIndex: 0,
   runtimes: [],
   alertMessage: "",
+  isMetaPanelOpen: false,
 };
 
 const elements = hasDom ? {
   deckId: document.querySelector("#deck-id"),
   slideCount: document.querySelector("#slide-count"),
+  toggleMeta: document.querySelector("#toggle-meta"),
+  closeMeta: document.querySelector("#close-meta"),
+  metaBackdrop: document.querySelector("#meta-backdrop"),
+  metaPanel: document.querySelector("#meta-panel"),
   deckPicker: document.querySelector("#deck-picker"),
   slidePicker: document.querySelector("#slide-picker"),
   deckMeta: document.querySelector("#deck-meta"),
@@ -46,6 +51,18 @@ async function bootstrap() {
 }
 
 function wireEvents() {
+  elements.toggleMeta.addEventListener("click", () => {
+    setMetaPanelOpen(!pageState.isMetaPanelOpen);
+  });
+
+  elements.closeMeta.addEventListener("click", () => {
+    setMetaPanelOpen(false);
+  });
+
+  elements.metaBackdrop.addEventListener("click", () => {
+    setMetaPanelOpen(false);
+  });
+
   elements.previousSlide.addEventListener("click", () => {
     goToPreviousSlide();
   });
@@ -78,6 +95,12 @@ function wireEvents() {
   });
 
   document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && pageState.isMetaPanelOpen) {
+      event.preventDefault();
+      setMetaPanelOpen(false);
+      return;
+    }
+
     const action = resolveKeyboardAction(event);
     if (!action) {
       return;
@@ -86,6 +109,21 @@ function wireEvents() {
     event.preventDefault();
     handleKeyboardAction(action);
   });
+}
+
+function setMetaPanelOpen(isOpen) {
+  pageState.isMetaPanelOpen = isOpen;
+  elements.metaPanel.classList.toggle("hidden", !isOpen);
+  elements.metaBackdrop.classList.toggle("hidden", !isOpen);
+  elements.metaPanel.setAttribute("aria-hidden", String(!isOpen));
+  elements.toggleMeta.setAttribute("aria-expanded", String(isOpen));
+
+  if (isOpen) {
+    elements.closeMeta.focus();
+    return;
+  }
+
+  elements.toggleMeta.focus();
 }
 
 function goToPreviousSlide() {

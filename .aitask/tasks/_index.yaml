@@ -1,6 +1,11 @@
 version: 1
-last_updated: 2026-03-13T23:39:00Z
+last_updated: 2026-03-14T00:05:00Z
 tasks:
+  - id: TASK-2026-0018
+    path: .aitask/tasks/TASK-2026-0018
+    status: closed
+    kind: live
+    title: Implement minimal browser viewer layout MVP
   - id: TASK-2026-0017
     path: .aitask/tasks/TASK-2026-0017
     status: closed
