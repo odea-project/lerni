@@ -1,0 +1,79 @@
+id: TASK-2026-0010
+title: Implement reveal and feedback runtime MVP
+status: risk-assessed
+summary: >-
+  Prepare the governed task for implementing the first reveal and feedback runtime
+  slice that executes bounded interaction state and transitions as defined in
+  docs/mvp-interaction-runtime.md.
+requester: human:repository.owner
+business_owner: human:repository.owner
+technical_owner: human:repo.maintainer
+proposer: agent:repo-bootstrapper
+executor: agent:interaction-runtime-implementer
+reviewer: human:repo.maintainer
+approver: human:repository.owner
+auditor: human:internal.auditor
+created_at: "2026-03-13T19:01:00Z"
+updated_at: "2026-03-13T19:05:00Z"
+due_date: null
+priority: high
+risk_tier: medium
+change_type: code
+systems_affected:
+  - interaction-runtime
+  - reveal-state
+  - feedback-state
+  - future-slide-execution
+data_classification: internal
+external_effects: internal-only
+allowed_agent_actions:
+  - draft and refine task records within approved scope
+  - implement a minimal reveal and feedback runtime slice aligned to docs/mvp-interaction-runtime.md after explicit human approval is recorded
+  - add focused tests and fixtures needed to validate bounded state and transition behavior
+  - update minimal documentation required to explain implemented behavior
+  - run repository validation and test commands and capture outputs as evidence
+prohibited_agent_actions:
+  - widen runtime scope into arbitrary scripting, plugin execution, or general application-state orchestration without explicit approval
+  - implement unrelated parser or renderer concerns under this task
+  - bypass medium-risk approval controls or self-approve code execution
+  - introduce unsupported assessment, persistence, or networking behavior under this task
+required_approvals:
+  - role: approver
+    identity: human:repository.owner
+    state: pending
+    approved_at: null
+    notes: Execution approval required before implementing interaction runtime code.
+linked_adr: not-required
+linked_issues: []
+linked_prs: []
+predecessor_tasks:
+  - TASK-2026-0006
+  - TASK-2026-0007
+  - TASK-2026-0009
+successor_tasks: []
+rollback_required: true
+evidence_required: true
+audit_scope: standard
+exceptions: []
+final_disposition: open
+status_history:
+  - from_status: null
+    to_status: proposed
+    changed_at: "2026-03-13T19:01:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Implementation task opened from the accepted MVP interaction-runtime design.
+  - from_status: proposed
+    to_status: triaged
+    changed_at: "2026-03-13T19:03:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Reveal and feedback runtime execution was separated from parser and template-resolution implementation concerns.
+  - from_status: triaged
+    to_status: specified
+    changed_at: "2026-03-13T19:04:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Deliverables, acceptance criteria, and code-scope boundaries for runtime MVP were documented.
+  - from_status: specified
+    to_status: risk-assessed
+    changed_at: "2026-03-13T19:05:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Implementation task classified as medium risk because it introduces executable runtime state and transition behavior.

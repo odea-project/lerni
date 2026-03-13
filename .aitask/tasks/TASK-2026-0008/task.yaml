@@ -1,0 +1,77 @@
+id: TASK-2026-0008
+title: Implement the semantic parser and document normalizer MVP
+status: risk-assessed
+summary: >-
+  Prepare the governed task for implementing the first parser and normalization
+  slice that turns Markdown-first authored source into the semantic document model
+  defined in docs/document-model.md.
+requester: human:repository.owner
+business_owner: human:repository.owner
+technical_owner: human:repo.maintainer
+proposer: agent:repo-bootstrapper
+executor: agent:parser-implementer
+reviewer: human:repo.maintainer
+approver: human:repository.owner
+auditor: human:internal.auditor
+created_at: "2026-03-13T18:50:00Z"
+updated_at: "2026-03-13T18:55:00Z"
+due_date: null
+priority: high
+risk_tier: medium
+change_type: code
+systems_affected:
+  - parser
+  - semantic-document-model
+  - future-template-resolution
+  - repository-docs
+data_classification: internal
+external_effects: internal-only
+allowed_agent_actions:
+  - draft and refine task records within approved scope
+  - implement a minimal parser and normalization slice aligned to docs/document-model.md after explicit human approval is recorded
+  - add focused tests and fixtures needed to validate parser and normalization behavior
+  - update minimal documentation required to explain implemented behavior
+  - run repository validation and test commands and capture outputs as evidence
+prohibited_agent_actions:
+  - widen parser scope into unsupported authoring syntax or plugin systems without explicit approval
+  - implement renderer or interaction-runtime behavior under this task
+  - bypass medium-risk approval controls or self-approve code execution
+  - introduce arbitrary scripting support as part of parsing behavior
+required_approvals:
+  - role: approver
+    identity: human:repository.owner
+    state: pending
+    approved_at: null
+    notes: Execution approval required before implementing parser or normalization code.
+linked_adr: not-required
+linked_issues: []
+linked_prs: []
+predecessor_tasks:
+  - TASK-2026-0005
+successor_tasks: []
+rollback_required: true
+evidence_required: true
+audit_scope: standard
+exceptions: []
+final_disposition: open
+status_history:
+  - from_status: null
+    to_status: proposed
+    changed_at: "2026-03-13T18:50:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Implementation task opened from the accepted semantic document-model baseline.
+  - from_status: proposed
+    to_status: triaged
+    changed_at: "2026-03-13T18:52:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: The parser and normalizer slice was separated from template-resolution and runtime implementation work.
+  - from_status: triaged
+    to_status: specified
+    changed_at: "2026-03-13T18:54:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Deliverables, acceptance criteria, and code-scope boundaries for the parser MVP were documented.
+  - from_status: specified
+    to_status: risk-assessed
+    changed_at: "2026-03-13T18:55:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Implementation task classified as medium risk because it introduces the first executable interpretation of authored source into the semantic document model.

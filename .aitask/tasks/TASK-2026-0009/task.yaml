@@ -1,0 +1,79 @@
+id: TASK-2026-0009
+title: Implement template contract validation and resolution MVP
+status: risk-assessed
+summary: >-
+  Prepare the governed task for implementing the first template contract validation
+  and resolution slice that binds normalized semantic content into reusable template
+  structures as defined in docs/template-runtime-contract.md.
+requester: human:repository.owner
+business_owner: human:repository.owner
+technical_owner: human:repo.maintainer
+proposer: agent:repo-bootstrapper
+executor: agent:template-resolver-implementer
+reviewer: human:repo.maintainer
+approver: human:repository.owner
+auditor: human:internal.auditor
+created_at: "2026-03-13T18:56:00Z"
+updated_at: "2026-03-13T19:00:00Z"
+due_date: null
+priority: high
+risk_tier: medium
+change_type: code
+systems_affected:
+  - template-resolution
+  - template-validation
+  - semantic-document-model
+  - future-rendering-pipeline
+data_classification: internal
+external_effects: internal-only
+allowed_agent_actions:
+  - draft and refine task records within approved scope
+  - implement a minimal template validation and resolution slice aligned to docs/template-runtime-contract.md after explicit human approval is recorded
+  - add focused tests and fixtures needed to validate slot binding and failure behavior
+  - update minimal documentation required to explain implemented behavior
+  - run repository validation and test commands and capture outputs as evidence
+prohibited_agent_actions:
+  - widen template support into general layout programming or renderer selection without explicit approval
+  - implement runtime interaction behavior under this task
+  - bypass medium-risk approval controls or self-approve code execution
+  - silently coerce invalid template bindings instead of enforcing documented contract behavior
+required_approvals:
+  - role: approver
+    identity: human:repository.owner
+    state: pending
+    approved_at: null
+    notes: Execution approval required before implementing template validation or resolution code.
+linked_adr: not-required
+linked_issues: []
+linked_prs: []
+predecessor_tasks:
+  - TASK-2026-0005
+  - TASK-2026-0006
+  - TASK-2026-0008
+successor_tasks: []
+rollback_required: true
+evidence_required: true
+audit_scope: standard
+exceptions: []
+final_disposition: open
+status_history:
+  - from_status: null
+    to_status: proposed
+    changed_at: "2026-03-13T18:56:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Implementation task opened from the accepted template runtime contract.
+  - from_status: proposed
+    to_status: triaged
+    changed_at: "2026-03-13T18:58:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Template validation and resolution was separated from parser implementation and runtime interaction behavior.
+  - from_status: triaged
+    to_status: specified
+    changed_at: "2026-03-13T18:59:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Deliverables, acceptance criteria, and code-scope boundaries for template resolution MVP were documented.
+  - from_status: specified
+    to_status: risk-assessed
+    changed_at: "2026-03-13T19:00:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Implementation task classified as medium risk because it introduces executable structural binding and contract enforcement behavior.

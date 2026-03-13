@@ -1,6 +1,21 @@
 version: 1
-last_updated: 2026-03-13T18:42:00Z
+last_updated: 2026-03-13T19:05:00Z
 tasks:
+  - id: TASK-2026-0008
+    path: .aitask/tasks/TASK-2026-0008
+    status: risk-assessed
+    kind: live
+    title: Implement the semantic parser and document normalizer MVP
+  - id: TASK-2026-0009
+    path: .aitask/tasks/TASK-2026-0009
+    status: risk-assessed
+    kind: live
+    title: Implement template contract validation and resolution MVP
+  - id: TASK-2026-0010
+    path: .aitask/tasks/TASK-2026-0010
+    status: risk-assessed
+    kind: live
+    title: Implement reveal and feedback runtime MVP
   - id: TASK-2026-0005
     path: .aitask/tasks/TASK-2026-0005
     status: closed
