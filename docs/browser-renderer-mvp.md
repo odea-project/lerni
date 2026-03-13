@@ -33,12 +33,14 @@ The static renderer currently supports:
 - `title-overview`
 - `quiz-feedback`
 - previous and next slide navigation
+- bounded swipe-style transitions on slide changes
 - reveal advancement
 - single answer selection
 - explicit feedback reveal
 - slide reset
 - manifest-driven deck selection by picker or `?deck=` URL parameter
 - minimal content-first viewer layout with an on-demand controls and details panel
+- larger slide typography for better projector readability
 
 The browser layer remains intentionally bounded. It is not a framework, editor, backend, or general state platform.
 
@@ -67,9 +69,11 @@ The browser also exposes a small fixed shortcut set for the existing actions: Le
 
 On quiz slides, answer choices now support a bounded keyboard flow: Tab enters the choice list, arrow keys move focus between choices, and Enter or Space selects the focused answer. After selection, focus moves to the feedback action when it is available.
 
-The default browser layout now prioritizes the slide surface itself. Deck selectors, runtime state, template metadata, and browser handoff details are hidden by default behind a `Controls` panel instead of occupying persistent side boxes.
+The default browser layout now prioritizes the slide surface itself. Deck selectors, runtime state, template metadata, and browser handoff details are hidden by default behind a `Menu` panel instead of occupying persistent side boxes.
 
 The viewer styling is also intentionally calm and minimal: the header chrome is slimmer, the slide surface uses flatter and cleaner content sections, and the controls panel avoids the earlier heavy box-in-box treatment.
+
+The viewer now also leans more clearly into presentation use: slide typography is scaled up for projected reading distance, and slide changes use a short directional swipe motion so navigation reads more like a deck advance than a dashboard refresh.
 
 For the simplified local workflow, use:
 

@@ -1,6 +1,11 @@
 version: 1
-last_updated: 2026-03-14T00:28:00Z
+last_updated: 2026-03-14T00:52:00Z
 tasks:
+  - id: TASK-2026-0020
+    path: .aitask/tasks/TASK-2026-0020
+    status: closed
+    kind: live
+    title: Improve browser presentation-mode readability and slide motion MVP
   - id: TASK-2026-0019
     path: .aitask/tasks/TASK-2026-0019
     status: closed

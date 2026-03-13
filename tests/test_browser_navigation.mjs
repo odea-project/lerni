@@ -1,7 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
-import { isShortcutTargetBlocked, resolveChoiceNavigationIndex, resolveKeyboardAction } from "../web/app.js";
+import {
+  isShortcutTargetBlocked,
+  resolveChoiceNavigationIndex,
+  resolveKeyboardAction,
+  resolveSlideTransitionDirection,
+} from "../web/app.js";
 
 test("resolveKeyboardAction maps the bounded shortcut set", () => {
   assert.equal(resolveKeyboardAction({ key: "ArrowLeft", target: null }), "previous-slide");
@@ -43,4 +48,10 @@ test("resolveChoiceNavigationIndex ignores unrelated keys or empty choice sets",
   assert.equal(resolveChoiceNavigationIndex(0, "Enter", 3), null);
   assert.equal(resolveChoiceNavigationIndex(0, " ", 3), null);
   assert.equal(resolveChoiceNavigationIndex(0, "ArrowRight", 0), null);
+});
+
+test("resolveSlideTransitionDirection returns bounded directional motion", () => {
+  assert.equal(resolveSlideTransitionDirection(0, 1), "forward");
+  assert.equal(resolveSlideTransitionDirection(4, 1), "backward");
+  assert.equal(resolveSlideTransitionDirection(2, 2), null);
 });

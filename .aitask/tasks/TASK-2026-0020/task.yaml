@@ -1,0 +1,102 @@
+id: TASK-2026-0020
+title: Improve browser presentation-mode readability and slide motion MVP
+status: closed
+summary: >-
+  Make the browser viewer more projector-friendly by increasing slide typography
+  and adding bounded swipe-style slide transitions while preserving the current
+  static browser architecture.
+requester: human:repository.owner
+business_owner: human:repository.owner
+technical_owner: human:repo.maintainer
+proposer: agent:repo-bootstrapper
+executor: agent:browser-navigation-implementer
+reviewer: human:repository.owner
+approver: human:repository.owner
+auditor: human:repository.owner
+created_at: "2026-03-14T00:36:00Z"
+updated_at: "2026-03-14T00:52:00Z"
+due_date: null
+priority: normal
+risk_tier: low
+change_type: code
+systems_affected:
+  - browser-renderer
+  - browser-layout
+  - browser-presentation
+  - browser-validation
+data_classification: internal
+external_effects: internal-only
+allowed_agent_actions:
+  - draft and refine task records within approved scope
+  - implement bounded presentation-oriented typography and slide motion after explicit human approval is recorded
+  - add lightweight validation for any new transition helper logic without introducing a browser framework
+  - update minimal documentation required to explain the presentation-oriented viewer behavior
+  - run repository validation and browser-serving checks and capture outputs as evidence
+prohibited_agent_actions:
+  - widen scope into a full presentation framework, media engine, or routing system without explicit approval
+  - remove current browser actions or metadata access under this task
+  - bypass low-risk approval controls or self-approve code execution
+  - introduce backend, persistence, or new build dependencies under this task
+required_approvals:
+  - role: approver
+    identity: human:repository.owner
+    state: approved
+    approved_at: "2026-03-14T00:36:00Z"
+    notes: Repository owner approved the presentation-focused follow-up by requesting larger presentation typography and swipe transitions.
+linked_adr: not-required
+linked_issues: []
+linked_prs: []
+predecessor_tasks:
+  - TASK-2026-0019
+successor_tasks: []
+rollback_required: true
+evidence_required: true
+audit_scope: standard
+exceptions: []
+final_disposition: implemented
+status_history:
+  - from_status: null
+    to_status: proposed
+    changed_at: "2026-03-14T00:36:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: The viewer now needs stronger projector readability and visible slide motion to function better as a beamable presentation surface.
+  - from_status: proposed
+    to_status: triaged
+    changed_at: "2026-03-14T00:37:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Presentation-oriented readability and slide motion were separated as their own follow-up so the browser experience can improve without broadening product scope too quickly.
+  - from_status: triaged
+    to_status: specified
+    changed_at: "2026-03-14T00:38:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: Deliverables, acceptance criteria, and scope boundaries for larger presentation typography and swipe-style motion were documented.
+  - from_status: specified
+    to_status: risk-assessed
+    changed_at: "2026-03-14T00:39:00Z"
+    changed_by: agent:repo-bootstrapper
+    reason: The task is low risk because it refines only viewer presentation and bounded motion behavior while preserving current controls and static delivery.
+  - from_status: risk-assessed
+    to_status: approved
+    changed_at: "2026-03-14T00:36:00Z"
+    changed_by: human:repository.owner
+    reason: Execution approved for a bounded presentation-oriented refinement focused on readability and slide motion.
+  - from_status: approved
+    to_status: in-progress
+    changed_at: "2026-03-14T00:43:00Z"
+    changed_by: agent:browser-navigation-implementer
+    reason: Implementation work started for larger slide typography, swipe transitions, and lightweight validation.
+  - from_status: in-progress
+    to_status: in-review
+    changed_at: "2026-03-14T00:48:00Z"
+    changed_by: agent:browser-navigation-implementer
+    reason: Browser viewer code, styles, tests, and documentation were updated to add directional slide motion and stronger presentation-oriented typography.
+  - from_status: in-review
+    to_status: accepted
+    changed_at: "2026-03-14T00:50:00Z"
+    changed_by: human:repository.owner
+    reason: Validation results and delivered scope were reviewed against the bounded presentation-oriented acceptance criteria.
+  - from_status: accepted
+    to_status: closed
+    changed_at: "2026-03-14T00:52:00Z"
+    changed_by: human:repository.owner
+    reason: The presentation-oriented viewer refinement was completed, validated, and accepted within the approved low-risk scope.

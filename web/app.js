@@ -7,6 +7,8 @@ const pageState = {
   runtimes: [],
   alertMessage: "",
   isMetaPanelOpen: false,
+  pendingTransitionDirection: null,
+  transitionResetHandle: null,
 };
 
 const elements = hasDom ? {
@@ -20,6 +22,7 @@ const elements = hasDom ? {
   slidePicker: document.querySelector("#slide-picker"),
   deckMeta: document.querySelector("#deck-meta"),
   browserAlert: document.querySelector("#browser-alert"),
+  slideCard: document.querySelector("#slide-card"),
   slideTemplate: document.querySelector("#slide-template"),
   slideKind: document.querySelector("#slide-kind"),
   slideContent: document.querySelector("#slide-content"),
@@ -89,9 +92,7 @@ function wireEvents() {
   });
 
   elements.slidePicker.addEventListener("change", (event) => {
-    pageState.alertMessage = "";
-    pageState.slideIndex = normalizeSlideIndex(Number.parseInt(event.target.value, 10), pageState.deck.slides.length);
-    render();
+    setCurrentSlideIndex(Number.parseInt(event.target.value, 10));
   });
 
   document.addEventListener("keydown", (event) => {
@@ -127,23 +128,22 @@ function setMetaPanelOpen(isOpen) {
 }
 
 function goToPreviousSlide() {
-  if (pageState.slideIndex === 0) {
-    return false;
-  }
-
-  pageState.alertMessage = "";
-  pageState.slideIndex -= 1;
-  render();
-  return true;
+  return setCurrentSlideIndex(pageState.slideIndex - 1);
 }
 
 function goToNextSlide() {
-  if (pageState.slideIndex >= pageState.deck.slides.length - 1) {
+  return setCurrentSlideIndex(pageState.slideIndex + 1);
+}
+
+function setCurrentSlideIndex(nextSlideIndex) {
+  const normalizedSlideIndex = normalizeSlideIndex(nextSlideIndex, pageState.deck.slides.length);
+  if (normalizedSlideIndex === pageState.slideIndex) {
     return false;
   }
 
   pageState.alertMessage = "";
-  pageState.slideIndex += 1;
+  pageState.pendingTransitionDirection = resolveSlideTransitionDirection(pageState.slideIndex, normalizedSlideIndex);
+  pageState.slideIndex = normalizedSlideIndex;
   render();
   return true;
 }
@@ -248,6 +248,7 @@ async function loadDeck(deckId, requestedSlideIndex = 0) {
   pageState.deck = await response.json();
   pageState.slideIndex = normalizeSlideIndex(requestedSlideIndex, pageState.deck.slides.length);
   pageState.runtimes = pageState.deck.slides.map((slide) => createRuntimeState(slide));
+  pageState.pendingTransitionDirection = null;
   elements.deckPicker.value = deckId;
   populateSlidePicker();
   elements.deckMeta.textContent = `${manifestEntry.title} · ${manifestEntry.slideCount} slides · source ${manifestEntry.sourcePath}`;
@@ -269,6 +270,8 @@ function render() {
   const slide = getCurrentSlide();
   const runtime = getCurrentRuntime();
   const snapshot = computeSnapshot(slide, runtime);
+  const transitionDirection = pageState.pendingTransitionDirection;
+  pageState.pendingTransitionDirection = null;
 
   elements.deckId.textContent = pageState.deck.deckId;
   elements.slideCount.textContent = `${pageState.slideIndex + 1} / ${pageState.deck.slides.length}`;
@@ -278,9 +281,35 @@ function render() {
 
   renderAlert();
   renderSlide(slide, runtime, snapshot);
+  applySlideTransition(transitionDirection);
   renderRuntime(snapshot);
   renderControls(slide, snapshot);
   updateBrowserUrl(pageState.deck.deckId, pageState.slideIndex);
+}
+
+function applySlideTransition(direction) {
+  if (!hasDom) {
+    return;
+  }
+
+  const transitionClasses = ["transition-forward", "transition-backward"];
+  elements.slideCard.classList.remove(...transitionClasses);
+
+  if (pageState.transitionResetHandle !== null) {
+    window.clearTimeout(pageState.transitionResetHandle);
+    pageState.transitionResetHandle = null;
+  }
+
+  if (!direction) {
+    return;
+  }
+
+  void elements.slideCard.offsetWidth;
+  elements.slideCard.classList.add(`transition-${direction}`);
+  pageState.transitionResetHandle = window.setTimeout(() => {
+    elements.slideCard.classList.remove(...transitionClasses);
+    pageState.transitionResetHandle = null;
+  }, 420);
 }
 
 function renderAlert() {
@@ -601,6 +630,16 @@ function normalizeSlideIndex(slideIndex, slideCount) {
   return Math.min(slideIndex, slideCount - 1);
 }
 
+function resolveSlideTransitionDirection(currentIndex, nextIndex) {
+  if (nextIndex > currentIndex) {
+    return "forward";
+  }
+  if (nextIndex < currentIndex) {
+    return "backward";
+  }
+  return null;
+}
+
 function buildSlideLabel(slide, index) {
   const titleSlot = slide.slots.find((slot) => slot.slotName === "title");
   const titleBlock = titleSlot && titleSlot.blocks.length > 0 ? titleSlot.blocks[0] : null;
@@ -684,6 +723,7 @@ function resolveKeyboardAction(event) {
 }
 
 export {
+  resolveSlideTransitionDirection,
   resolveChoiceNavigationIndex,
   isShortcutTargetBlocked,
   resolveKeyboardAction,
